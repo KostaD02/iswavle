@@ -1,0 +1,18 @@
+<section class="wrapper">
+  <aside class="left">
+    <article *ngFor="let item of LANGUAGES_DATA">
+      <app-codeeditor
+        (contentEmitter)="codeEmitted($event)"
+        [previousCode]="getPreviousCode(item.name)"
+        [readOnly]="item.readOnly"
+        [language]="item.language"
+        [languageName]="item.name"
+        [languageIcon]="item.icon"
+        [langaugeIconColor]="item.iconColor">
+      </app-codeeditor>
+    </article>
+  </aside>
+  <aside class="right">
+    <iframe [srcdoc]="visual | noSanitize" sandbox="allow-scripts"></iframe>
+  </aside>
+</section>

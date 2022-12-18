@@ -1,16 +1,17 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
+
+import { CodemirrorModule } from '@ctrl/ngx-codemirror';
 
 import { AppRoutingModule } from './app-routing.module';
+import { MaterialModule } from './module';
+import { NoSanitizePipe } from './pipes';
+
 import { AppComponent } from './app.component';
-import { MaterialModule } from './module/material.module';
-
-import { HomepageComponent } from './views/homepage/homepage.component';
-import { NotfoundComponent } from './views/notfound/notfound.component';
-
-import { HeaderComponent } from './shared/header/header.component';
-import { FooterComponent } from './shared/footer/footer.component';
+import { HeaderComponent, FooterComponent, CodeeditorComponent } from './shared';
+import { HomepageComponent, NotfoundComponent, EditorComponent } from './views';
 
 @NgModule({
   declarations: [
@@ -18,13 +19,18 @@ import { FooterComponent } from './shared/footer/footer.component';
     HomepageComponent,
     NotfoundComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    CodeeditorComponent,
+    EditorComponent,
+    NoSanitizePipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    FormsModule,
+    CodemirrorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

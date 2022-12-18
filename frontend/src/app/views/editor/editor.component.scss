@@ -1,0 +1,34 @@
+.wrapper {
+  width: 95%;
+  height: 100%;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 30px;
+
+  .left {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    row-gap: 25px;
+
+    article {
+      max-width: 100%;
+    }
+  }
+
+  .right {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: 1px solid red;
+      //border: 0px;
+    }
+  }
+}
