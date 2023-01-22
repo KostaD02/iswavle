@@ -8,7 +8,7 @@ export class WebRequestsService {
   readonly rootUrl: string;
 
   constructor(private http: HttpClient) {
-    this.rootUrl = "not yet";
+    this.rootUrl = "http://localhost:3000"; //TODO update it
   }
 
   public get(url: string) {

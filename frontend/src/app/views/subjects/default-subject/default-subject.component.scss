@@ -1,0 +1,17 @@
+article {
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 10px;
+
+  .top {
+    text-align: center;
+  }
+
+  .bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+}

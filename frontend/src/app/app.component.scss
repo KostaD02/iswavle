@@ -1,0 +1,60 @@
+header {
+  width: 100%;
+  height: 56px;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: 10;
+  background-color: var(--primary-color);
+  box-shadow: 0 3px 5px -1px #0003, 0 6px 10px #00000024, 0 1px 18px #0000001f;
+}
+
+main {
+  width: 100%;
+  max-height: calc(100vh - 56px);
+  overflow-y: auto;
+  position: relative;
+  top: 56px;
+  left: 0px;
+
+  .sidenav {
+    width: 200px;
+  }
+
+  mat-sidenav-content {
+    mat-toolbar {
+      height: 80px;
+      background-color: var(--primary-color);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0px;
+
+      section {
+        width: 95%;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        h1,
+        button {
+          font-weight: 300;
+          font-size: 20px;
+          color: white;
+        }
+      }
+    }
+  }
+}
+
+.after-resize-header {
+  height: 90px;
+}
+
+.after-resize-main {
+  top: 90px;
+
+  mat-sidenav {
+    top: 90px !important;
+  }
+}

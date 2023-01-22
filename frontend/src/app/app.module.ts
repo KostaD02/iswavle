@@ -2,16 +2,18 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
-
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { CodemirrorModule } from '@ctrl/ngx-codemirror';
-
-import { AppRoutingModule } from './app-routing.module';
-import { MaterialModule } from './module';
-import { NoSanitizePipe } from './pipes';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 import { AppComponent } from './app.component';
-import { HeaderComponent, FooterComponent, CodeeditorComponent } from './shared';
-import { HomepageComponent, NotfoundComponent, EditorComponent } from './views';
+import { AppRoutingModule } from './app-routing.module';
+
+import { MaterialModule } from './module';
+import { CapitalizePipe, NoSanitizePipe, SubjectFormatter } from './pipes';
+import { HeaderComponent, FooterComponent, CodeeditorComponent, ExampleCodeComponent, ExternalSourceComponent, SubjectCardComponent } from './shared';
+import { HomepageComponent, NotfoundComponent, EditorComponent, DefaultSubjectComponent, SubjectComponent, SubjectsComponent } from './views';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,15 @@ import { HomepageComponent, NotfoundComponent, EditorComponent } from './views';
     FooterComponent,
     CodeeditorComponent,
     EditorComponent,
-    NoSanitizePipe
+    NoSanitizePipe,
+    SubjectFormatter,
+    SubjectsComponent,
+    CapitalizePipe,
+    SubjectComponent,
+    DefaultSubjectComponent,
+    ExternalSourceComponent,
+    ExampleCodeComponent,
+    SubjectCardComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +40,10 @@ import { HomepageComponent, NotfoundComponent, EditorComponent } from './views';
     BrowserAnimationsModule,
     MaterialModule,
     FormsModule,
-    CodemirrorModule
+    CodemirrorModule,
+    ScrollingModule,
+    NgxSkeletonLoaderModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

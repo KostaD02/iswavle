@@ -87,6 +87,6 @@ export class EditorComponent implements OnInit {
   }
 
   public getPreviousCode(name: string) {
-    return ""; //implement after BE update
+    return ""; //TODO
   }
 }

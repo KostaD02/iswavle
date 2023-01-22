@@ -3,12 +3,16 @@
 @import "codemirror/addon/hint/show-hint.css";
 @import "codemirror/addon/fold/foldgutter.css";
 
-$primary-color: #0082e6;
-$primary-font: Roboto, "Helvetica Neue", sans-serif;
-
+:root {
+  --primary-color: #3f51b5;
+  --primary-color-hover: #3347ba8b;
+  --primary-font: Roboto, "Helvetica Neue", sans-serif;
+}
 
 body {
   margin: 0px;
   padding: 0px;
-  font-family: $primary-font;
+  font-family: var(--primary-font);
+  box-sizing: border-box;
+  background-color: white;
 }

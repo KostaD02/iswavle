@@ -1,0 +1,29 @@
+<section class="wrapper" [ngClass]="{'full-size': (isHandset$ | async)}">
+  <aside class="sidenav" *ngIf="!(isHandset$ | async)" [ngClass]="{'overflow': isLoaded,'overflow-hidden':!isLoaded}">
+    <mat-list role="list" class="list" *ngIf="isLoaded">
+      <mat-list-item *ngFor="let item of subject" class="item" role="listitem">
+        <div [ngClass]="{'selectable': item.isSelectable}">
+          <div class="element">
+            <ng-container *ngIf="!item.isSelectable">
+              <h2>{{ item | subjectFormatter}}</h2>
+            </ng-container>
+            <ng-container *ngIf="item.isSelectable">
+              <a (click)="activeSubject(item)" [routerLink]="item.route">{{ item | subjectFormatter}}</a>
+            </ng-container>
+          </div>
+        </div>
+      </mat-list-item>
+    </mat-list>
+    <mat-list *ngIf="!isLoaded">
+      <ngx-skeleton-loader count="30" appearance="line"></ngx-skeleton-loader>
+    </mat-list>
+  </aside>
+  <aside class="content" [ngClass]="{'overflow': isLoaded,'overflow-hidden':!isLoaded}">
+    <div *ngIf="isLoaded;else loader">
+      <router-outlet></router-outlet>
+    </div>
+    <ng-template #loader>
+      <ngx-skeleton-loader count="30" animation="pulse"></ngx-skeleton-loader>
+    </ng-template>
+  </aside>
+</section>

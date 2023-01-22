@@ -1,0 +1,20 @@
+.wrapper {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 20px;
+
+  .banner{
+    width: 100%;
+    background-color: var(--primary-color);
+    //TODO
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    h1{
+      font-size: 60px;
+    }
+  }
+}

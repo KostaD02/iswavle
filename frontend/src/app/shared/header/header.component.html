@@ -1,1 +1,27 @@
-<p>header works!</p>
+<section [ngClass]="{'after-resize-wrapper':(isHandset$ | async)}">
+  <div class="wrapper">
+    <aside class="left">
+      <span class="logo" routerLink="/">Educate</span>
+    </aside>
+    <aside class="middle" *ngIf="!(isHandset$ | async)">
+      <nav>
+        <a mat-button routerLink="/subject">Subjects</a>
+        <a mat-button routerLink="/editor">Editor</a>
+        <a mat-button routerLink="/editor">About Me</a>
+      </nav>
+    </aside>
+    <aside class="right">
+      <a href="https://github.com/KostaD02/educate" target="_blank">
+        <i class="fa-brands fa-github"></i>
+        <span>GitHub</span>
+      </a>
+    </aside>
+  </div>
+  <div class="after-resize" *ngIf="isHandset$ | async">
+    <nav>
+      <a mat-button routerLink="/subject">Subjects</a>
+      <a mat-button routerLink="/editor">Editor</a>
+      <a mat-button routerLink="/editor">About Me</a>
+    </nav>
+  </div>
+</section>

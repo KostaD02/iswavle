@@ -1,9 +1,43 @@
-<header>
+<header [ngClass]="{'after-resize-header':(isHandset$ | async)}">
   <app-header></app-header>
 </header>
-<main>
-  <router-outlet></router-outlet>
+<main [ngClass]="{'after-resize-main':(isHandset$ | async)}">
+  <mat-sidenav-container>
+    <mat-sidenav
+      #drawer
+      class="sidenav"
+      fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="false"
+    >
+      <mat-nav-list>
+        <div *ngFor="let subject of subjects">
+          <div *ngIf="subject.isSelectable;else headerTopic">
+            <a mat-list-item routerLink="subject/{{subject.route}}" (click)="drawer.close()">{{ subject.name }}</a>
+          </div>
+          <ng-template #headerTopic>
+            <mat-toolbar>{{ subject.name }}</mat-toolbar>
+          </ng-template>
+        </div>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <mat-toolbar *ngIf="showToolBar">
+        <section>
+          <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" *ngIf="isHandset$ | async">
+            <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+          </button>
+          <h1>{{ toolBarName | capitalize }}</h1>
+        </section>
+        <!-- <nav *ngIf="!(isHandset$ | async)">
+          <a mat-button routerLink="/editor">Editor</a>
+        </nav> -->
+      </mat-toolbar>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+  <footer>
+    <app-footer></app-footer>
+  </footer>
 </main>
-<!-- <footer>
-  <app-footer></app-footer>
-</footer>` -->
