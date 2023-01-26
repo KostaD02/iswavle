@@ -11,7 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { MaterialModule } from './module';
 import { CapitalizePipe, NoSanitizePipe, SubjectFormatter } from './pipes';
-import { HeaderComponent, FooterComponent, CodeeditorComponent, ExampleCodeComponent, ExternalSourceComponent, SubjectCardComponent } from './shared';
+import { HeaderComponent, FooterComponent, CodeeditorComponent, ExampleCodeComponent, ExternalSourceComponent, SubjectCardComponent, ErrorOutputComponent } from './shared';
 import { HomepageComponent, NotfoundComponent, EditorComponent, DefaultSubjectComponent, SubjectComponent, SubjectsComponent } from './views';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -32,7 +32,8 @@ import { HttpClientModule } from '@angular/common/http';
     DefaultSubjectComponent,
     ExternalSourceComponent,
     ExampleCodeComponent,
-    SubjectCardComponent
+    SubjectCardComponent,
+    ErrorOutputComponent
   ],
   imports: [
     BrowserModule,

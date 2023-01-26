@@ -9,7 +9,19 @@ import { SubjectsComponent } from './views/subjects/subjects.component';
 
 const routes: Routes = [
   { path: '', component: HomepageComponent },
-  { path: 'editor', component: EditorComponent },
+  {
+    path: 'editor',
+    component: EditorComponent,
+    children: [
+      {
+        path: ':id',
+        component: SubjectsComponent,
+        data: {
+          loadCode : true
+        }
+      }
+    ]
+  },
   {
     path: 'subject',
     component: SubjectsComponent,

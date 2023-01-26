@@ -5,7 +5,7 @@ const app = express();
 const bodyParser = require("body-parser");
 
 const { mongoose } = require("./db/mongoose");
-const { Error, Subject } = require("./db/models");
+const { Error, Subject, CodeExample } = require("./db/models");
 
 const PORT = 3000;
 
@@ -14,6 +14,29 @@ app.use(cors());
 
 app.get("/", (req, res) => {
   res.send('Welcome to education BE');
+});
+
+app.get('/code/:id', (req, res) => {
+  CodeExample.findOne({
+    _id: req.params.id
+  }).then((result) => {
+    res.send(result);
+  }).catch(() => {
+    res.status(404);
+  });
+});
+
+app.post('/code', (req, res) => {
+  const codeExample = new CodeExample({
+    code: req.body.code,
+    description: req.body.description
+  });
+
+  codeExample.save().then((result) => {
+    res.send({ result });
+  }).catch((err) => {
+    res.status(400).json(err);
+  });
 });
 
 app.get('/subjects', (req, res) => {

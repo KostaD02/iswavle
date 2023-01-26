@@ -69,4 +69,18 @@ export class SweetAlertModalsService {
       }
     })
   }
+
+  public displayDialog(title: string, confirmText: string, denyButtonText: string, successResult: string, successDescription: string, successResultIcon: string ,action: () => void){
+    Swal.fire({
+      title: title,
+      showDenyButton: true,
+      confirmButtonText: confirmText,
+      denyButtonText: denyButtonText,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(successResult, successDescription, successResultIcon as SweetAlertIcon);
+        action();
+      }
+    })
+  }
 }

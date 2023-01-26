@@ -1,18 +1,49 @@
-<section class="wrapper">
+<section class="wrapper" [ngClass]="{'custom-tempalte-column ': rotateFrame}">
   <aside class="left">
-    <article *ngFor="let item of LANGUAGES_DATA">
-      <app-codeeditor
-        (contentEmitter)="codeEmitted($event)"
-        [previousCode]="getPreviousCode(item.name)"
-        [readOnly]="item.readOnly"
-        [language]="item.language"
-        [languageName]="item.name"
-        [languageIcon]="item.icon"
-        [langaugeIconColor]="item.iconColor">
-      </app-codeeditor>
-    </article>
+    <section>
+      <section class="code">
+        <mat-tab-group #matTabGroup>
+          <mat-tab *ngFor="let item of LANGUAGES_DATA;let i = index">
+            <ng-template mat-tab-label>
+              <article class="header-content">
+                <div class="header-text" [innerHTML]="item.icon" [ngStyle]="{'color':item.iconColor}"></div> <span>{{ item.name }}</span>
+              </article>
+            </ng-template>
+            <app-codeeditor
+              (contentEmitter)="codeEmitted($event)"
+              [previousCode]="previousCode[i]"
+              [readOnly]="item.readOnly"
+              [language]="item.language"
+              [languageName]="item.name"
+              [stream$]="clearStream$"
+              [codeStream$]="codeStream$"
+              [index]="i"
+            >
+            </app-codeeditor>
+          </mat-tab>
+        </mat-tab-group>
+        <!-- ! bugged because of eval
+          <section class="error-output">
+            <app-error-output [error]="jsErrorOutput" [hasError]="jsHasError"></app-error-output>
+          </section>
+        -->
+      </section>
+      <section class="buttons">
+        <div class="buttons-group">
+          <button (click)="resetCode()" mat-raised-button color="warn">Reset</button>
+          <button (click)="copySingleCode()" mat-raised-button color="primary">Copy</button>
+          <button (click)="copyWholeCode()" mat-raised-button color="primary">Copy all</button>
+          <button (click)="downloadCodeAction()" class="green-button" mat-raised-button color="primary">Download</button>
+        </div>
+        <div class="buttons-group actions">
+          <button (click)="toggleResultion()" mat-raised-button color="primary">{{ showResultion ? 'Hide dimensions' : 'Show dimensions' }}</button>
+          <button (click)="rotate()" mat-raised-button color="primary">Rotate</button>
+        </div>
+      </section>
+    </section>
   </aside>
   <aside class="right">
-    <iframe [srcdoc]="visual | noSanitize" sandbox="allow-scripts"></iframe>
+    <div *ngIf="showResultion"><span>{{ resolution }}</span></div>
+    <iframe #frame [srcdoc]="visual | noSanitize" sandbox="allow-scripts"></iframe>
   </aside>
 </section>

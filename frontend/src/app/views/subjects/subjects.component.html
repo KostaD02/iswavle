@@ -8,7 +8,7 @@
               <h2>{{ item | subjectFormatter}}</h2>
             </ng-container>
             <ng-container *ngIf="item.isSelectable">
-              <a (click)="activeSubject(item)" [routerLink]="item.route">{{ item | subjectFormatter}}</a>
+              <a (click)="activeSubject(item)" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active" [routerLink]="item.route">{{ item | subjectFormatter}}</a>
             </ng-container>
           </div>
         </div>

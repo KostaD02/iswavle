@@ -1,0 +1,14 @@
+<div class="error-wrapper">
+  <div class="error-logger">
+    <div class="icon">
+      <i class="fa-solid" [ngClass]="{'fa-check':!hasError,'fa-triangle-exclamation':hasError}"></i>
+    </div>
+    <div class="text">
+      <span> {{error}} </span>
+      <span class="disable-select" *ngIf="!hasError">Successfully compiled</span>
+    </div>
+    <div *ngIf="!!error">
+      <span><i (click)="copyError()" class="fa-solid fa-copy"></i></span>
+    </div>
+  </div>
+</div>

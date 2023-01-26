@@ -1,15 +1,37 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { WEB_LANGUAGES_DATA } from '../../constants';
-import { WebCodeContentInterface, CodeMirrorEmiterData } from '../../interfaces';
-import { SweetAlertModalsService, InformationService } from '../../services';
+import { WebCodeContentEnum } from './../../enums';
+import { WebCodeContentInterface, CodeMirrorEmiterData, ResponseCodeInterface } from '../../interfaces';
+import { SweetAlertModalsService, InformationService, WebRequestsService } from '../../services';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { takeUntil, tap } from 'rxjs/operators';
+import { Clipboard } from '@angular/cdk/clipboard';
+import { MatTabGroup } from '@angular/material/tabs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-editor',
   templateUrl: './editor.component.html',
   styleUrls: ['./editor.component.scss']
 })
-export class EditorComponent implements OnInit {
+export class EditorComponent implements OnInit, OnDestroy {
+  @ViewChild('matTabGroup', { static: true }) private matTabGroup!: MatTabGroup;
+  @ViewChild('frame', { static: true }) private frame!: ElementRef;
+
   public LANGUAGES_DATA = WEB_LANGUAGES_DATA;
+
+  public readonly clearStream$ = new BehaviorSubject<boolean>(false);
+  public readonly codeStream$ = new BehaviorSubject<string[]>(['','','']);
+  public readonly destroy$ = new Subject<void>();
+
+  public jsErrorOutput: string = '';
+  public jsHasError: boolean = false;
+
+  public resolution: string = '1200px x 1000px';
+  public showResultion: boolean = true;
+  public rotateFrame: boolean = false;
+
+  public previousCode: string[] = ['','',''];
 
   public content: WebCodeContentInterface = {
     html: "",
@@ -20,36 +42,84 @@ export class EditorComponent implements OnInit {
   public visual: string = this.getCode();
 
   constructor(
+    private router: Router,
+    private clipBoard: Clipboard,
     private sweetAlertModalsService: SweetAlertModalsService,
-    private informationService: InformationService
+    private informationService: InformationService,
+    private httpService: WebRequestsService
   ) { }
 
   @HostListener('window:keydown', ['$event']) keyEvent(event: KeyboardEvent) {
     if (event.key === 's' && event.ctrlKey) {
       event.preventDefault();
-      if (this.content.html === "" && this.content.css === "" && this.content.javascript === "") {
-        this.sweetAlertModalsService.emptyTemplateDownload(this.getCode());
-      } else {
-        this.sweetAlertModalsService.downloadHtml(
-          'Input file name',
-          'file name for download',
-          'Enter file name',
-          this.getCode(),
-          'html'
-        );
-      }
+      this.downloadCode();
     }
   }
 
-  ngOnInit(): void { }
+  @HostListener('window:resize') resize() {
+    this.initResolutionValue();
+  }
+
+  ngOnInit(): void {
+    this.resize();
+    this.loadPreviousCode();
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+  }
+
+  private loadPreviousCode(){
+    const url = this.router.url.split('/');
+    if (url[1] === 'editor' && url[2]?.length === 24){
+      this.httpService.get(`code/${url[2]}`).pipe(
+        tap((result )=>{
+          const response = result as ResponseCodeInterface;
+          response.code.forEach((code: string, index: number) => {
+            this.previousCode[index] = code;
+
+            if (index === 2){
+              this.previousCode[index] = `// Don't loop code otherwise it will freeze your tab \n${this.previousCode[index]}`;
+            }
+          });
+          this.codeStream$.next(this.previousCode);
+          this.updateCode();
+        }),
+        takeUntil(this.destroy$)
+      ).subscribe();
+    }
+  }
+
+  private initResolutionValue(){
+    const frame = this.frame.nativeElement as HTMLElement;
+    this.resolution = `${frame.offsetWidth} x ${frame.offsetHeight}`;
+  }
+
+  private downloadCode() {
+    if (this.content.html === "" && this.content.css === "" && this.content.javascript === "") {
+      this.sweetAlertModalsService.emptyTemplateDownload(this.getCode());
+    } else {
+      this.sweetAlertModalsService.downloadHtml(
+        'Input file name',
+        'file name for download',
+        'Enter file name',
+        this.getCode(),
+        'html'
+      );
+    }
+  }
 
   public codeEmitted(data: CodeMirrorEmiterData): void {
     this.content[`${data.languageName}`] = data.content;
-    console.clear();
     this.updateCode();
+    /*
+      ! because of eval code execution , it's getting buggy + XSS security risks , redo later
+      this.errorOutput();
+    */
   }
 
   private updateCode(): void {
+    console.clear();
     this.visual = this.getCode();
   }
 
@@ -76,6 +146,12 @@ export class EditorComponent implements OnInit {
           />
           <title>${this.informationService.title}</title>
           <link rel="icon" type="image/x-icon" href="${this.informationService.favicon ?? 'https://avatars.githubusercontent.com/u/68782786?v=4'}">
+          <style>
+            body {
+              margin: 0px;
+              padding: 0px;
+            }
+          </style>
           <style>${this.content.css}</style>
         </head>
         <body>
@@ -86,7 +162,99 @@ export class EditorComponent implements OnInit {
     `;
   }
 
-  public getPreviousCode(name: string) {
-    return ""; //TODO
+  private errorOutput() {
+    let hasError;
+    try {
+      eval(this.content[WebCodeContentEnum.JS]);
+    } catch (error) {
+      hasError = true;
+      this.jsHasError = true;
+      this.jsErrorOutput = error as string ?? '';
+    }
+    if (!hasError) {
+      this.jsErrorOutput = '';
+      this.jsHasError = false;
+    }
+  }
+
+  public resetCode() {
+    const content = [this.content[WebCodeContentEnum.HTML], this.content[WebCodeContentEnum.CSS], this.content[WebCodeContentEnum.JS]];
+    if (content.every(code => code.length === 0)){
+      return;
+    }
+
+    const resetAction = () => {
+      this.clearStream$.next(true);
+      this.content = {
+        html: "",
+        css: "",
+        javascript: ""
+      }
+      this.jsErrorOutput = '';
+      this.jsHasError = false;
+      this.updateCode();
+    }
+
+    this.sweetAlertModalsService.displayDialog('Are you sure to reset all code ?', 'Yes', 'No', 'Code reseted successfully', '', 'success', resetAction);
+  }
+
+  public copySingleCode() {
+    const successfullyCopyToast = () => {
+      this.sweetAlertModalsService.displayToast("Code copied successfully", 'success', 'green');
+    }
+    const copyEmpty = () => {
+      this.sweetAlertModalsService.displayToast("Code is empty", 'question', 'var(--primary-color)');
+    }
+    try {
+      if (this.matTabGroup._allTabs.first.isActive) {
+        if (this.content[WebCodeContentEnum.HTML]) {
+          successfullyCopyToast();
+          this.clipBoard.copy(this.content[WebCodeContentEnum.HTML]);
+        } else {
+          copyEmpty();
+        }
+      } else if (this.matTabGroup._allTabs.last.isActive) {
+        if (this.content[WebCodeContentEnum.JS]) {
+          successfullyCopyToast();
+          this.clipBoard.copy(this.content[WebCodeContentEnum.JS]);
+        } else {
+          copyEmpty();
+        }
+      } else {
+        if (this.content[WebCodeContentEnum.CSS]) {
+          successfullyCopyToast();
+          this.clipBoard.copy(this.content[WebCodeContentEnum.CSS]);
+        } else {
+          copyEmpty();
+        }
+      }
+    } catch (err) {
+      this.sweetAlertModalsService.displayToast("Can't copy code", 'error', 'red');
+    }
+  }
+
+  public copyWholeCode() {
+    const content = [this.content[WebCodeContentEnum.HTML], this.content[WebCodeContentEnum.CSS], this.content[WebCodeContentEnum.JS]];
+    if (content.some(code => code !== '')) {
+      this.sweetAlertModalsService.displayToast("Copied all code", 'success', 'green');
+    } else {
+      this.sweetAlertModalsService.displayToast("Copied empty template", 'question', 'var(--primary-color)');
+    }
+    this.clipBoard.copy(this.getCode());
+  }
+
+  public downloadCodeAction() {
+    this.downloadCode();
+  }
+
+  public toggleResultion() {
+    this.showResultion = !this.showResultion;
+  }
+
+  public rotate() {
+    this.rotateFrame = !this.rotateFrame;
+    setTimeout(() => {
+      this.resize(); // * need setTimeout for calculate correct dimensions
+    }, 100);
   }
 }

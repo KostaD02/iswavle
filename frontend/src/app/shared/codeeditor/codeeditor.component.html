@@ -1,8 +1,1 @@
-<mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-  <mat-expansion-panel-header>
-    <mat-panel-title>
-      <div [innerHTML]="languageIcon" [ngStyle]="{'color':langaugeIconColor}"></div> <span>{{ languageName }}</span>
-    </mat-panel-title>
-  </mat-expansion-panel-header>
-  <ngx-codemirror (keyup)="onKeyUp()" [(ngModel)]="content" [options]="options"></ngx-codemirror>
-</mat-expansion-panel>
+<ngx-codemirror #codeMirror (keyup)="onKeyUp()" [(ngModel)]="content" [options]="options"></ngx-codemirror>

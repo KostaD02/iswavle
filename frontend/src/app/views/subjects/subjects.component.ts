@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
+import { tap, takeUntil } from 'rxjs/operators';
 
 import { SubjectInterface } from '../../interfaces';
 import { HeaderService, SubjectService, WebRequestsService } from '../../services';
@@ -11,9 +10,11 @@ import { HeaderService, SubjectService, WebRequestsService } from '../../service
   templateUrl: './subjects.component.html',
   styleUrls: ['./subjects.component.scss']
 })
-export class SubjectsComponent implements OnInit {
+export class SubjectsComponent implements OnInit, OnDestroy {
+  public readonly isHandset$: Observable<boolean> = this.headerService.isHandset$;
+  public readonly destroy$ = new Subject<void>();
+
   public subject: SubjectInterface[] = [];
-  public isHandset$: Observable<boolean> = this.headerService.isHandset$;
   public isLoaded: boolean = false;
 
   constructor(
@@ -29,8 +30,13 @@ export class SubjectsComponent implements OnInit {
         const subjectsArray = subjects as SubjectInterface[];
         this.subjectService.subjects$.next(subjectsArray);
         this.subject = subjectsArray;
-      })
+      }),
+      takeUntil(this.destroy$)
     ).subscribe();
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
   }
 
   public activeSubject(subject: SubjectInterface) {

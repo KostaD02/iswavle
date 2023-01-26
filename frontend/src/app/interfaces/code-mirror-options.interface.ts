@@ -6,6 +6,10 @@ export interface CodeMirrorGutters {
 }
 
 export interface CodeMirrorOptions {
+  foldGutter?: boolean;
+  autoCloseBrackets?: boolean;
+  matchBrackets?: boolean;
+  lint?: boolean;
   value?: string;
   mode?: string | object;
   lineSeparator?: string | null;

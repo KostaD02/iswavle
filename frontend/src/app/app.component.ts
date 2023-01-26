@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 export class AppComponent implements OnInit {
   public toolBarName: string = this.sideNavService.toolBarTitle;
   public showToolBar: boolean = this.sideNavService.showSideNavContentStream$.value;
+  public isRouteSubject: boolean = true;
 
   public isHandset$: Observable<boolean> = this.headerService.isHandset$;
   public subjects: SubjectInterface[] = [];
@@ -54,6 +55,7 @@ export class AppComponent implements OnInit {
         }).map(value => {
           return value.split("_").join(" ");
         });
+        this.isRouteSubject = title[0] === 'Subject';
         this.titleService.setTitle(`${(title?.length === 0 || title === undefined || title[0] === '') ? this.informationService.title : title.join(' | ')}`);
       })
     ).subscribe();

@@ -1,16 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { Title } from '@angular/platform-browser';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { tap } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { takeUntil, tap } from 'rxjs/operators';
 import { SubjectInterface } from 'src/app/interfaces';
-import { InformationService, SubjectService } from 'src/app/services';
+import { SubjectService } from 'src/app/services';
 
 @Component({
   selector: 'app-subject',
   templateUrl: './subject.component.html',
   styleUrls: ['./subject.component.scss']
 })
-export class SubjectComponent implements OnInit {
+export class SubjectComponent implements OnInit, OnDestroy {
+  public readonly destroy$ = new Subject<void>();
+
   subject!: SubjectInterface;
   param: string = "";
 
@@ -23,9 +25,14 @@ export class SubjectComponent implements OnInit {
     this.router.events.pipe(
       tap(() => {
         this.initSubject();
-      })
+      }),
+      takeUntil(this.destroy$)
     ).subscribe();
     this.initSubject();
+  }
+
+  ngOnDestroy(): void {
+      this.destroy$.next();
   }
 
   private initSubject() {
@@ -41,6 +48,7 @@ export class SubjectComponent implements OnInit {
           this.subject = this.subjectService.subjects$.value.find(subject => subject.route === this.param) || this.subjectService.subjects$.value[0];
         }
       }),
+      takeUntil(this.destroy$)
     ).subscribe();
   }
 }

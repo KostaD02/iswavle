@@ -9,10 +9,18 @@
   --primary-font: Roboto, "Helvetica Neue", sans-serif;
 }
 
-body {
+body { // TODO update px values
   margin: 0px;
   padding: 0px;
   font-family: var(--primary-font);
   box-sizing: border-box;
   background-color: white;
+}
+
+.disable-select {
+  user-select: none;
+}
+
+.swal2-actions {
+  margin: 0px !important;
 }

@@ -25,14 +25,13 @@
     <mat-sidenav-content>
       <mat-toolbar *ngIf="showToolBar">
         <section>
-          <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" *ngIf="isHandset$ | async">
-            <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-          </button>
+          <div *ngIf="isRouteSubject">
+            <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" *ngIf="isHandset$ | async">
+              <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+            </button>
+          </div>
           <h1>{{ toolBarName | capitalize }}</h1>
         </section>
-        <!-- <nav *ngIf="!(isHandset$ | async)">
-          <a mat-button routerLink="/editor">Editor</a>
-        </nav> -->
       </mat-toolbar>
       <router-outlet></router-outlet>
     </mat-sidenav-content>
