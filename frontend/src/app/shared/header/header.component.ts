@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { SubjectService } from 'src/app/services';
 import { HeaderService } from 'src/app/services/header.service';
 
 @Component({

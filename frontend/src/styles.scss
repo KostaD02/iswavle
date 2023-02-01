@@ -9,7 +9,8 @@
   --primary-font: Roboto, "Helvetica Neue", sans-serif;
 }
 
-body { // TODO update px values
+body {
+  // TODO update px values
   margin: 0px;
   padding: 0px;
   font-family: var(--primary-font);
@@ -23,4 +24,38 @@ body { // TODO update px values
 
 .swal2-actions {
   margin: 0px !important;
+}
+
+.list-style-none {
+  list-style: none;
+}
+
+h3 {
+  margin: 0px 0px 10px !important;
+  font-weight: 600 !important;
+}
+
+a {
+  text-decoration: none;
+}
+
+.opening-tag,
+.closing-tag {
+  color: #ff5370;
+}
+
+.opening-tag::before {
+  content: "<";
+}
+
+.opening-tag::after {
+  content: ">";
+}
+
+.closing-tag::before {
+  content: "</";
+}
+
+.closing-tag::after {
+  content: ">";
 }

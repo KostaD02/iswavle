@@ -19,9 +19,10 @@ export class EditorComponent implements OnInit, OnDestroy {
   @ViewChild('frame', { static: true }) private frame!: ElementRef;
 
   public LANGUAGES_DATA = WEB_LANGUAGES_DATA;
+  public previousCode: string[] = ['','',"// Don't loop code otherwise it will freeze your tab \n"];
 
   public readonly clearStream$ = new BehaviorSubject<boolean>(false);
-  public readonly codeStream$ = new BehaviorSubject<string[]>(['','','']);
+  public readonly codeStream$ = new BehaviorSubject<string[]>(this.previousCode);
   public readonly destroy$ = new Subject<void>();
 
   public jsErrorOutput: string = '';
@@ -30,8 +31,6 @@ export class EditorComponent implements OnInit, OnDestroy {
   public resolution: string = '1200px x 1000px';
   public showResultion: boolean = true;
   public rotateFrame: boolean = false;
-
-  public previousCode: string[] = ['','',''];
 
   public content: WebCodeContentInterface = {
     html: "",

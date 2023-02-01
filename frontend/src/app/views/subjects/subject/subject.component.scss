@@ -1,3 +1,35 @@
-article {
+section {
   padding: 20px 50px;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 15px;
+}
+
+.example-code {
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 15px;
+  padding: 10px;
+}
+
+h3 {
+  margin: 0px 0px 10px;
+  font-weight: 600;
+}
+
+a {
+  text-decoration: none;
+}
+
+app-example-code {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
 }

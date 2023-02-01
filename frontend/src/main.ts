@@ -8,6 +8,7 @@ import "codemirror/lib/codemirror";
 import "codemirror/keymap/sublime";
 
 import "codemirror/mode/xml/xml";
+import "codemirror/mode/htmlembedded/htmlembedded"
 import "codemirror/mode/javascript/javascript";
 import "codemirror/mode/css/css";
 

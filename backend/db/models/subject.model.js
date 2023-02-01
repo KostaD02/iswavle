@@ -35,9 +35,7 @@ const subjectSchema = new mongoose.Schema({
     type: Array,
   },
   data: {
-    type: String,
-    minlength: 2,
-    trim: true,
+    type: Array,
   },
   createdAt: {
     type: Date,

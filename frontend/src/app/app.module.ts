@@ -4,16 +4,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { CodemirrorModule } from '@ctrl/ngx-codemirror';
+import { HttpClientModule } from '@angular/common/http';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { MaterialModule } from './module';
-import { CapitalizePipe, NoSanitizePipe, SubjectFormatter } from './pipes';
+import { CapitalizePipe, HtmlTagPipe, NoSanitizePipe, SubjectFormatter } from './pipes';
 import { HeaderComponent, FooterComponent, CodeeditorComponent, ExampleCodeComponent, ExternalSourceComponent, SubjectCardComponent, ErrorOutputComponent } from './shared';
 import { HomepageComponent, NotfoundComponent, EditorComponent, DefaultSubjectComponent, SubjectComponent, SubjectsComponent } from './views';
-import { HttpClientModule } from '@angular/common/http';
+import { HtmlTagDirective } from './directives';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,9 @@ import { HttpClientModule } from '@angular/common/http';
     ExternalSourceComponent,
     ExampleCodeComponent,
     SubjectCardComponent,
-    ErrorOutputComponent
+    ErrorOutputComponent,
+    HtmlTagDirective,
+    HtmlTagPipe,
   ],
   imports: [
     BrowserModule,
@@ -44,7 +47,7 @@ import { HttpClientModule } from '@angular/common/http';
     CodemirrorModule,
     ScrollingModule,
     NgxSkeletonLoaderModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

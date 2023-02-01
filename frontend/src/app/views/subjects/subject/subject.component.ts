@@ -8,7 +8,7 @@ import { SubjectService } from 'src/app/services';
 @Component({
   selector: 'app-subject',
   templateUrl: './subject.component.html',
-  styleUrls: ['./subject.component.scss']
+  styleUrls: ['./subject.component.scss'],
 })
 export class SubjectComponent implements OnInit, OnDestroy {
   public readonly destroy$ = new Subject<void>();
@@ -18,8 +18,8 @@ export class SubjectComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
-    private subjectService: SubjectService,
-  ) {}
+    private subjectService: SubjectService
+  ) { }
 
   ngOnInit(): void {
     this.router.events.pipe(
@@ -32,7 +32,7 @@ export class SubjectComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-      this.destroy$.next();
+    this.destroy$.next();
   }
 
   private initSubject() {
@@ -40,7 +40,7 @@ export class SubjectComponent implements OnInit, OnDestroy {
     this.subjectService.activeSubject$.pipe(
       tap((subject) => {
         this.subject = subject;
-        if(!this.subjectService.isSubjectLoaded){
+        if (!this.subjectService.isSubjectLoaded) {
           this.subject = this.subjectService.subjects$.value.find(subject => subject.route === this.param) || this.subjectService.subjects$.value[0];
         }
         if (this.subject.route !== this.param) {
@@ -50,5 +50,23 @@ export class SubjectComponent implements OnInit, OnDestroy {
       }),
       takeUntil(this.destroy$)
     ).subscribe();
+  }
+
+  public backRoute() {
+    return this.getRoute(1);
+  }
+
+  public nextRoute() {
+    return this.getRoute(-1);
+  }
+
+  private getRoute(option: number = 1){
+    const filterSelectableSubjects = this.subjectService.subjects$.value.filter(subject => subject.isSelectable);
+    const currentSubjectIndex = filterSelectableSubjects.findIndex(subject => subject.route === this.subject.route);
+    if (option === 1){
+      return (currentSubjectIndex === 0) ? '' : `/subject/${filterSelectableSubjects[currentSubjectIndex - option].route}`;
+    } else {
+      return (currentSubjectIndex + 1 === filterSelectableSubjects.length) ? '' : `/subject/${filterSelectableSubjects[currentSubjectIndex - option].route}`;
+    }
   }
 }

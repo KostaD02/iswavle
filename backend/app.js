@@ -68,8 +68,21 @@ app.post('/subject', (req, res) => {
   })
 });
 
+app.patch("/subject/:id",(req,res)=>{
+  Subject.findOneAndUpdate(
+    { _id: req.params.id},
+    {
+      $set: req.body,
+    }
+  ).then(() => {
+    res.sendStatus(200);
+  }).catch(()=>{
+    res.sendStatus(404);
+  })
+});
+
 app.listen(PORT, () => {
-  console.log(`Sever is listening on port ${PORT}`);
+  console.log(`Server is listening on port ${PORT}`);
 });
 
 process.on("uncaughtException", function (err) {

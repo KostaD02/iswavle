@@ -1,7 +1,7 @@
 export const WEB_LANGUAGES_DATA = [
   {
     name: 'HTML',
-    language: 'xml',
+    language: 'htmlembedded',
     icon: '<i class="fa-brands fa-html5"></i>',
     iconColor: "#DD4B25",
     readOnly: false,

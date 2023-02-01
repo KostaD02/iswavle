@@ -37,6 +37,10 @@ export class CodeeditorComponent implements OnInit, AfterViewInit, OnDestroy {
     }, 100);
     this.initRefreshStream();
     this.initCodeStream();
+
+    if (this.readOnly){
+      this.options['cursorHeight'] = 0;
+    }
   }
 
   ngAfterViewInit(): void {
@@ -108,7 +112,10 @@ export class CodeeditorComponent implements OnInit, AfterViewInit, OnDestroy {
           languageName = WebCodeContentEnum.JS;
         }
 
-        this.contentEmitter.emit({content,languageName})
+        this.contentEmitter.emit({content, languageName});
+        if (this.previousCode){
+          this.content = this.previousCode;
+        }
       }),
       takeUntil(this.destroy$)
     ).subscribe();
