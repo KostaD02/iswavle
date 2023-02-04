@@ -1,6 +1,12 @@
 <section class="wrapper" [ngClass]="{'full-size': (isHandset$ | async)}">
   <aside class="sidenav" *ngIf="!(isHandset$ | async)" [ngClass]="{'overflow': isLoaded,'overflow-hidden':!isLoaded}">
     <mat-list role="list" class="list" *ngIf="isLoaded">
+      <mat-list-item class="item search-item" role="search">
+        <mat-form-field class="search">
+          <mat-label>ფილტრაცია</mat-label>
+          <input [(ngModel)]="searchValue" (input)="filter()" matInput placeholder="მაგალითად HTML">
+        </mat-form-field>
+      </mat-list-item>
       <mat-list-item *ngFor="let item of subject" class="item" role="listitem">
         <div [ngClass]="{'selectable': item.isSelectable}">
           <div class="element">
@@ -12,6 +18,9 @@
             </ng-container>
           </div>
         </div>
+      </mat-list-item>
+      <mat-list-item class="item search-result" *ngIf="!isMatch">
+        <p>თემა ვერ მოიძებნა</p>
       </mat-list-item>
     </mat-list>
     <mat-list *ngIf="!isLoaded">

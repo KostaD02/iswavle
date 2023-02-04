@@ -12,13 +12,24 @@
       [opened]="false"
     >
       <mat-nav-list>
+        <div class="search-item">
+          <mat-list-item role="search">
+            <mat-form-field>
+              <mat-label>ფილტრაცია</mat-label>
+              <input [(ngModel)]="searchValue" (input)="filter()" matInput placeholder="მაგალითად HTML">
+            </mat-form-field>
+          </mat-list-item>
+        </div>
         <div *ngFor="let subject of subjects">
           <div *ngIf="subject.isSelectable;else headerTopic">
-            <a mat-list-item routerLink="subject/{{subject.route}}" (click)="drawer.close()">{{ subject.name }}</a>
+            <a mat-list-item routerLink="subject/{{subject.route}}" (click)="drawer.close()">{{ subject | subjectFormatter}}</a>
           </div>
           <ng-template #headerTopic>
-            <mat-toolbar>{{ subject.name }}</mat-toolbar>
+            <mat-toolbar>{{ subject | subjectFormatter }}</mat-toolbar>
           </ng-template>
+        </div>
+        <div *ngIf="!isMatch">
+          <p>თემა ვერ მოიძებნა</p>
         </div>
       </mat-nav-list>
     </mat-sidenav>

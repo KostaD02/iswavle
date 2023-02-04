@@ -22,6 +22,21 @@ main {
 
   .sidenav {
     width: 250px;
+    max-width: 250px;
+    overflow-x: auto;
+    line-break: anywhere;
+
+    .search-item {
+      margin-top: 10px;
+
+      .mat-form-field {
+        width: 100%;
+      }
+    }
+
+    .mat-toolbar {
+      background-color: transparent;
+    }
   }
 
   mat-sidenav-content {

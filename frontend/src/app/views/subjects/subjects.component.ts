@@ -17,6 +17,9 @@ export class SubjectsComponent implements OnInit, OnDestroy {
   public subject: SubjectInterface[] = [];
   public isLoaded: boolean = false;
 
+  public isMatch: boolean = true;
+  public searchValue: string = "";
+
   constructor(
     private headerService: HeaderService,
     private subjectService: SubjectService,
@@ -41,5 +44,15 @@ export class SubjectsComponent implements OnInit, OnDestroy {
 
   public activeSubject(subject: SubjectInterface) {
     this.subjectService.activeSubject = subject;
+  }
+
+  public filter() {
+    this.subject = this.subject.filter(subject => `${subject.prefix ?? ''} ${subject.name}`.trim().toLowerCase().includes(this.searchValue.toLowerCase()) && subject.isSelectable);
+    this.isMatch = this.subject.length >= 0;
+
+    if (!this.searchValue || this.searchValue.length === 0) {
+      this.subject = this.subjectService.subjects$.value;
+      this.isMatch = true;
+    }
   }
 }

@@ -18,6 +18,9 @@ export class AppComponent implements OnInit {
   public isHandset$: Observable<boolean> = this.headerService.isHandset$;
   public subjects: SubjectInterface[] = [];
 
+  public isMatch: boolean = true;
+  public searchValue: string = "";
+
   constructor(
     private titleService: Title,
     private router: Router,
@@ -59,5 +62,15 @@ export class AppComponent implements OnInit {
         this.titleService.setTitle(`${(title?.length === 0 || title === undefined || title[0] === '') ? this.informationService.title : title.join(' | ')}`);
       })
     ).subscribe();
+  }
+
+  public filter() {
+    this.subjects = this.subjects.filter(subject => `${subject.prefix ?? ''} ${subject.name}`.trim().toLowerCase().includes(this.searchValue.toLowerCase()) && subject.isSelectable);
+    this.isMatch = this.subjects.length >= 0;
+
+    if (!this.searchValue || this.searchValue.length === 0) {
+      this.subjects = this.subjectService.subjects$.value;
+      this.isMatch = true;
+    }
   }
 }
