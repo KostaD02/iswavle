@@ -16,7 +16,7 @@
           <mat-list-item role="search">
             <mat-form-field>
               <mat-label>ფილტრაცია</mat-label>
-              <input [(ngModel)]="searchValue" (input)="filter()" matInput placeholder="მაგალითად HTML">
+              <input [(ngModel)]="searchValue" (input)="filterSubject()" matInput placeholder="მაგალითად HTML">
             </mat-form-field>
           </mat-list-item>
         </div>
@@ -34,17 +34,20 @@
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
-      <mat-toolbar *ngIf="showToolBar">
+      <mat-toolbar *ngIf="showToolBar" class="topic">
         <section>
           <div *ngIf="isRouteSubject">
             <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" *ngIf="isHandset$ | async">
               <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
             </button>
           </div>
-          <h1>{{ toolBarName | capitalize }}</h1>
+          <h1 *ngIf="!isRouteNotFound">{{ toolBarName | capitalize }}</h1>
+          <h1 *ngIf="isRouteNotFound">გვერდი ვერ მოიძებნა</h1>
         </section>
       </mat-toolbar>
-      <router-outlet></router-outlet>
+      <section [ngClass]="{'margin-top-topic': showToolBar}">
+        <router-outlet></router-outlet>
+      </section>
     </mat-sidenav-content>
   </mat-sidenav-container>
   <footer>

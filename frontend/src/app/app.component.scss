@@ -40,7 +40,11 @@ main {
   }
 
   mat-sidenav-content {
+    position: relative;
+
     mat-toolbar {
+      position: fixed;
+      z-index: 20;
       height: 80px;
       background-color: var(--primary-color);
       display: flex;
@@ -63,6 +67,10 @@ main {
       }
     }
   }
+}
+
+.margin-top-topic {
+  margin-top: 80px;
 }
 
 .after-resize-header {

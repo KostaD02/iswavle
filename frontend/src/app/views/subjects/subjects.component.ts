@@ -1,4 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy} from '@angular/core';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Observable, Subject } from 'rxjs';
 import { tap, takeUntil } from 'rxjs/operators';
 
@@ -8,7 +9,19 @@ import { HeaderService, SubjectService, WebRequestsService } from '../../service
 @Component({
   selector: 'app-subjects',
   templateUrl: './subjects.component.html',
-  styleUrls: ['./subjects.component.scss']
+  styleUrls: ['./subjects.component.scss'],
+  animations: [
+    trigger('fadeInOut', [
+      state('in', style({
+        opacity: 1
+      })),
+      state('out', style({
+        opacity: 0
+      })),
+      transition('in => out', animate('500ms ease-out')),
+      transition('out => in', animate('500ms ease-in'))
+    ])
+  ],
 })
 export class SubjectsComponent implements OnInit, OnDestroy {
   public readonly isHandset$: Observable<boolean> = this.headerService.isHandset$;
@@ -19,6 +32,9 @@ export class SubjectsComponent implements OnInit, OnDestroy {
 
   public isMatch: boolean = true;
   public searchValue: string = "";
+
+  public showScroll: boolean = false;
+  public animationOnSccroll: boolean = false;
 
   constructor(
     private headerService: HeaderService,
@@ -46,7 +62,7 @@ export class SubjectsComponent implements OnInit, OnDestroy {
     this.subjectService.activeSubject = subject;
   }
 
-  public filter() {
+  public filterSubject() {
     this.subject = this.subject.filter(subject => `${subject.prefix ?? ''} ${subject.name}`.trim().toLowerCase().includes(this.searchValue.toLowerCase()) && subject.isSelectable);
     this.isMatch = this.subject.length >= 0;
 
@@ -54,5 +70,10 @@ export class SubjectsComponent implements OnInit, OnDestroy {
       this.subject = this.subjectService.subjects$.value;
       this.isMatch = true;
     }
+  }
+
+  public onScroll(event: Event){
+    const target = event.target as HTMLElement;
+    this.showScroll = target.scrollTop >= (target.scrollHeight * 0.1);
   }
 }

@@ -33,3 +33,10 @@ app-example-code {
   display: flex;
   justify-content: space-between;
 }
+
+
+@media screen and (max-width: 425px) {
+  section{
+    padding: 20px 20px;
+  }
+}

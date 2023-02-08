@@ -4,7 +4,7 @@
       <mat-list-item class="item search-item" role="search">
         <mat-form-field class="search">
           <mat-label>ფილტრაცია</mat-label>
-          <input [(ngModel)]="searchValue" (input)="filter()" matInput placeholder="მაგალითად HTML">
+          <input [(ngModel)]="searchValue" (input)="filterSubject()" matInput placeholder="მაგალითად HTML">
         </mat-form-field>
       </mat-list-item>
       <mat-list-item *ngFor="let item of subject" class="item" role="listitem">
@@ -27,9 +27,10 @@
       <ngx-skeleton-loader count="30" appearance="line"></ngx-skeleton-loader>
     </mat-list>
   </aside>
-  <aside class="content" [ngClass]="{'overflow': isLoaded,'overflow-hidden':!isLoaded}">
+  <aside (scroll)="onScroll($event)"  class="content" #scrollContainer [ngClass]="{'overflow': isLoaded,'overflow-hidden':!isLoaded}">
     <div *ngIf="isLoaded;else loader">
       <router-outlet></router-outlet>
+      <app-scrollup [@fadeInOut]="showScroll ? 'in' : 'out'" [showScroll]="showScroll" [container]="scrollContainer"></app-scrollup>
     </div>
     <ng-template #loader>
       <ngx-skeleton-loader count="30" animation="pulse"></ngx-skeleton-loader>

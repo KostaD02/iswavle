@@ -12,8 +12,8 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { MaterialModule } from './module';
 import { CapitalizePipe, HtmlTagPipe, NoSanitizePipe, SubjectFormatter } from './pipes';
-import { HeaderComponent, FooterComponent, CodeeditorComponent, ExampleCodeComponent, ExternalSourceComponent, SubjectCardComponent, ErrorOutputComponent } from './shared';
-import { HomepageComponent, NotfoundComponent, EditorComponent, DefaultSubjectComponent, SubjectComponent, SubjectsComponent } from './views';
+import { HeaderComponent, FooterComponent, CodeeditorComponent, ExampleCodeComponent, ExternalSourceComponent, SubjectCardComponent, ErrorOutputComponent, ScrollupComponent } from './shared';
+import { HomepageComponent, NotfoundComponent, EditorComponent, DefaultSubjectComponent, SubjectComponent, SubjectsComponent, TasksComponent } from './views';
 import { HtmlTagDirective } from './directives';
 
 @NgModule({
@@ -37,6 +37,8 @@ import { HtmlTagDirective } from './directives';
     ErrorOutputComponent,
     HtmlTagDirective,
     HtmlTagPipe,
+    ScrollupComponent,
+    TasksComponent,
   ],
   imports: [
     BrowserModule,

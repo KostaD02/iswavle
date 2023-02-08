@@ -6,12 +6,10 @@ section { //TODO
   justify-content: center;
   align-items: center;
 
-  div {
-    width: 95%;
-
-    h2 {
-      color: white;
-      margin: 0px;
-    }
+  h3 {
+    color: white;
+    user-select: none;
+    font-weight: 600;
+    margin: 0px !important;
   }
 }

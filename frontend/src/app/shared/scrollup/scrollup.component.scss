@@ -1,0 +1,18 @@
+.scrollUp {
+  width: 30px;
+  height: 30px;
+  position: fixed;
+  right: 20px;
+  bottom: 90px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  opacity: 0.9;
+  background-color: var(--primary-color);
+
+  mat-icon {
+    color: white;
+  }
+}

@@ -7,5 +7,26 @@ export const KEYWORDS = [
   "javascript",
   "educate yourself",
   "learn by game",
-  "frontend"
-]
+  "frontend",
+  "iswavle",
+  "iswavle qartulad",
+  "iswavle html",
+  "iswavle css",
+  "iswavle js",
+  "ისწავლე ჰტმლ",
+  "ისწავლე ცსს",
+  "ისწავლე ჯს",
+  "შეისწავლე",
+  "თეორია",
+  "დოკუმენტაცია",
+  "დოკუმენტაცია ჰტმლ",
+  "დოკუმენტაცია ცსს",
+  "დოკუმენტაცია ჯს",
+  "თეორია ჰტმლ",
+  "თეორია ცსს",
+  "თეორია ჯს",
+  "ისწავლე ფრონტ ენდი",
+  "iswavle frontend",
+  "ონლაინ ედითორი",
+  "online editor"
+];

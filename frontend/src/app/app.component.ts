@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { HeaderService, InformationService, SidenavService, SubjectService } from './services';
-import { Observable, tap } from 'rxjs';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { HeaderService, InformationService, SeoServiceService, SidenavService, SubjectService } from './services';
+import { filter, map, mergeMap, Observable, tap } from 'rxjs';
 import { SubjectInterface } from './interfaces';
 import { Title } from '@angular/platform-browser';
-import { Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +14,7 @@ export class AppComponent implements OnInit {
   public toolBarName: string = this.sideNavService.toolBarTitle;
   public showToolBar: boolean = this.sideNavService.showSideNavContentStream$.value;
   public isRouteSubject: boolean = true;
+  public isRouteNotFound: boolean = false;
 
   public isHandset$: Observable<boolean> = this.headerService.isHandset$;
   public subjects: SubjectInterface[] = [];
@@ -21,13 +22,14 @@ export class AppComponent implements OnInit {
   public isMatch: boolean = true;
   public searchValue: string = "";
 
+
   constructor(
-    private titleService: Title,
     private router: Router,
     private headerService: HeaderService,
     private sideNavService: SidenavService,
     private subjectService: SubjectService,
-    private informationService: InformationService
+    private activatedRoute: ActivatedRoute,
+    private seoService: SeoServiceService
   ) { }
 
   ngOnInit(): void {
@@ -59,12 +61,26 @@ export class AppComponent implements OnInit {
           return value.split("_").join(" ");
         });
         this.isRouteSubject = title[0] === 'Subject';
-        this.titleService.setTitle(`${(title?.length === 0 || title === undefined || title[0] === '') ? this.informationService.title : title.join(' | ')}`);
-      })
-    ).subscribe();
+        this.isRouteNotFound = title[0] === '404';
+      }),
+      filter(e => e instanceof NavigationEnd),
+      map(e => this.activatedRoute),
+      map((route) => {
+        while (route.firstChild) route = route.firstChild;
+        return route;
+      }),
+      filter((route) => route.outlet === 'primary'),
+      mergeMap((route) => route.data)
+    ).subscribe(data => {
+      let seoData = data['seo'];
+      if (seoData) {
+        if (seoData['title']) this.seoService.updateTitle(seoData['title']);
+        if (seoData['metaTags']) this.seoService.updateMetaTags(seoData['metaTags']);
+      }
+    });
   }
 
-  public filter() {
+  public filterSubject() {
     this.subjects = this.subjects.filter(subject => `${subject.prefix ?? ''} ${subject.name}`.trim().toLowerCase().includes(this.searchValue.toLowerCase()) && subject.isSelectable);
     this.isMatch = this.subjects.length >= 0;
 
