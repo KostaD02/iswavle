@@ -1,6 +1,6 @@
 .wrapper {
   width: 95%;
-  height: calc(100% - 80px);
+  height: calc(100%);
   margin: auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -82,6 +82,7 @@
 
     iframe{
       min-height: 200px;
+      background-color: white;
     }
 
     .actions {

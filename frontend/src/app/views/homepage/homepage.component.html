@@ -1,5 +1,92 @@
 <section class="wrapper">
   <section class="banner">
-    <h1>Test</h1>
+    <article>
+      <div>
+        <h1>Iswavle</h1>
+        <p>Front end-ის ქართულ ენოვანი ცნობარი</p>
+      </div>
+      <div>
+        <a mat-raised-button routerLink="/subject">დაიწყე</a>
+      </div>
+    </article>
+    <div class="overlay"></div>
+  </section>
+  <section class="content">
+    <section class="examples">
+      <article>
+        <aside class="left">
+          <div>
+            <h3>HTML</h3>
+            <p>ვებ გვერდის სტრუქტურისათვის</p>
+          </div>
+        </aside>
+        <aside class="right">
+          <app-example-code [language]="'htmlembedded'" [code]="codeHTML"></app-example-code>
+        </aside>
+      </article>
+      <article>
+        <aside class="left">
+          <div>
+            <h3>CSS</h3>
+            <p>სტრუქტურის გაფორმებისათვის</p>
+          </div>
+        </aside>
+        <aside class="right">
+          <app-example-code [language]="'css'" [code]="codeCSS"></app-example-code>
+        </aside>
+      </article>
+      <article>
+        <aside class="left">
+          <div>
+            <h3>JavaScript</h3>
+            <p>კონტენტის შესაქმნელად და მის გასამართად</p>
+          </div>
+        </aside>
+        <aside class="right">
+          <app-example-code [language]="'javascript'" [code]="codeJS"></app-example-code>
+        </aside>
+      </article>
+    </section>
+    <section class="author">
+      <article>
+        <aside class="top">
+          <h3>საიტი შექმნილია კონსტანტინე დათუნიშვილის მიერ</h3>
+        </aside>
+        <aside class="bottom">
+          <a class="source" target="_blank" href="https://www.facebook.com/Kosta202/" >
+            <div class="icon">
+              <img src="../../../assets/svgs/facebook.svg" alt="facebook icon">
+            </div>
+            <div>
+              <span>Facebook</span>
+            </div>
+          </a>
+          <a class="source" target="_blank" href="https://www.linkedin.com/in/kostad/" >
+            <div class="icon">
+              <img src="../../../assets/svgs/linkedin.svg" alt="linkedin icon">
+            </div>
+            <div>
+              <span>Linkedin</span>
+            </div>
+          </a>
+          <a class="source" target="_blank" href="https://github.com/KostaD02" >
+            <div class="icon">
+              <img src="../../../assets/svgs/github.svg" alt="github icon">
+            </div>
+            <div>
+              <span>Github</span>
+            </div>
+          </a>
+          <a class="source" target="_blank" href="mailto:kdautinishvili@gmail.com" (click)="incrementCount()">
+            <div class="icon">
+              <img src="../../../assets/svgs/gmail.svg" alt="gmail icon">
+            </div>
+            <div>
+              <span>Gmail</span>
+            </div>
+          </a>
+        </aside>
+      </article>
+    </section>
   </section>
 </section>

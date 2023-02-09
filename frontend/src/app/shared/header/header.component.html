@@ -1,13 +1,13 @@
 <section [ngClass]="{'after-resize-wrapper':(isHandset$ | async)}">
   <div class="wrapper">
     <aside class="left">
-      <span class="logo" routerLink="/">ისწავლე</span>
+      <a mat-button class="logo" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">ისწავლე</a>
     </aside>
     <aside class="middle" *ngIf="!(isHandset$ | async)">
       <nav>
-        <a mat-button routerLink="/subject">თემები</a>
-        <a mat-button routerLink="/editor">ედითორი</a>
-        <a mat-button routerLink="/tasks">დავალებები</a>
+        <a mat-button routerLink="/subject" routerLinkActive="active">თემები</a>
+        <a mat-button routerLink="/editor" routerLinkActive="active">ედითორი</a>
+        <a mat-button routerLink="/tasks" routerLinkActive="active">დავალებები</a>
       </nav>
     </aside>
     <aside class="right">
@@ -19,9 +19,9 @@
   </div>
   <div class="after-resize" *ngIf="isHandset$ | async">
     <nav>
-      <a mat-button routerLink="/subject">თემები</a>
-      <a mat-button routerLink="/editor">ედითორი</a>
-      <a mat-button routerLink="/tasks">დავალებები</a>
+      <a mat-button routerLink="/subject" routerLinkActive="active">თემები</a>
+      <a mat-button routerLink="/editor" routerLinkActive="active">ედითორი</a>
+      <a mat-button routerLink="/tasks" routerLinkActive="active">დავალებები</a>
     </nav>
   </div>
 </section>

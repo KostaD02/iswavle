@@ -11,7 +11,6 @@ section {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    column-gap: 10px;
 
     aside {
       display: flex;
@@ -26,9 +25,8 @@ section {
         font-size: 16px;
       }
 
-      .logo {
+      .active {
         font-weight: 800;
-        font-size: 16px;
       }
     }
 
