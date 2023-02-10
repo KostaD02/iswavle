@@ -1,0 +1,16 @@
+section {
+  height: 100%;
+  position: relative;
+
+  h2 {
+    text-align: center;
+    font-size: 1.5rem;
+  }
+
+  app-loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 55vh;
+  }
+}

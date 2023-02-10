@@ -15,6 +15,7 @@ import { CapitalizePipe, HtmlTagPipe, NoSanitizePipe, SubjectFormatter } from '.
 import { HeaderComponent, FooterComponent, CodeeditorComponent, ExampleCodeComponent, ExternalSourceComponent, SubjectCardComponent, ErrorOutputComponent, ScrollupComponent } from './shared';
 import { HomepageComponent, NotfoundComponent, EditorComponent, DefaultSubjectComponent, SubjectComponent, SubjectsComponent, TasksComponent } from './views';
 import { HtmlTagDirective } from './directives';
+import { LoaderComponent } from './shared/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { HtmlTagDirective } from './directives';
     HtmlTagPipe,
     ScrollupComponent,
     TasksComponent,
+    LoaderComponent,
   ],
   imports: [
     BrowserModule,

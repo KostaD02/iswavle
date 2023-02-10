@@ -32,6 +32,7 @@
 
       p {
         font-size: 1.5rem;
+        line-height: 1.2;
         font-weight: 300;
       }
     }
@@ -119,6 +120,7 @@
             text-decoration: none;
             color: black;
             font-weight: 500;
+            flex-grow: 1;
 
             &:hover {
               color: var(--primary-color);
