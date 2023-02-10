@@ -49,7 +49,7 @@ const routes: Routes = [
     children: [
       {
         path: ':id',
-        component: SubjectsComponent,
+        component: EditorComponent,
         data: {
           loadCode: true
         }
