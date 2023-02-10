@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SweetAlertIcon } from '../../enums';
 import { SweetAlertModalsService } from '../../services';
 
@@ -7,7 +7,7 @@ import { SweetAlertModalsService } from '../../services';
   templateUrl: './homepage.component.html',
   styleUrls: ['./homepage.component.scss']
 })
-export class HomepageComponent {
+export class HomepageComponent implements OnInit {
   public codeHTML: string = `<!DOCTYPE html>\n<html lang="en">
   <head>
     <title>ვებ გვერდის სათაური</title>
@@ -38,13 +38,17 @@ export class HomepageComponent {
 
   private gmailClickCount: number = 0;
 
-  constructor(private sweetAlert: SweetAlertModalsService) {}
+  constructor(private sweetAlert: SweetAlertModalsService) { }
+
+  ngOnInit(): void {
+
+  }
 
   public incrementCount() {
     this.gmailClickCount++;
 
-    if (this.gmailClickCount >= 2){
-      this.sweetAlert.displayModal(SweetAlertIcon.Info, "ინფორმაცია","თუ პრობლემა არის მეილის გახსნასთან დაკავშირებით შეგიძლიათ თქვენით გამოაგზავნოთ მეილი ამ მისამართზე: kdautinishvili@gmail.com ან kdatunishvili@gmail.com");
+    if (this.gmailClickCount >= 2) {
+      this.sweetAlert.displayModal(SweetAlertIcon.Info, "ინფორმაცია", "თუ პრობლემა არის მეილის გახსნასთან დაკავშირებით შეგიძლიათ თქვენით გამოაგზავნოთ მეილი ამ მისამართზე: kdautinishvili@gmail.com ან kdatunishvili@gmail.com");
     }
   }
 }

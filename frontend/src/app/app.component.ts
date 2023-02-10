@@ -1,16 +1,30 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { HeaderService, InformationService, SeoServiceService, SidenavService, SubjectService } from './services';
+import { trigger, state, style, transition, animate } from '@angular/animations';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter, map, mergeMap, Observable, tap } from 'rxjs';
 import { SubjectInterface } from './interfaces';
-import { Title } from '@angular/platform-browser';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { HeaderService, SeoServiceService, SidenavService, SubjectService } from './services';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  animations: [
+    trigger('fadeInOut', [
+      state('in', style({
+        opacity: 1
+      })),
+      state('out', style({
+        opacity: 0
+      })),
+      transition('in => out', animate('500ms ease-out')),
+      transition('out => in', animate('500ms ease-in'))
+    ])
+  ],
 })
 export class AppComponent implements OnInit {
+  @ViewChild('scrollContainer', { static: true }) scrollContainer!: ElementRef;
+
   public toolBarName: string = this.sideNavService.toolBarTitle;
   public showToolBar: boolean = this.sideNavService.showSideNavContentStream$.value;
   public isRouteSubject: boolean = true;
@@ -22,6 +36,7 @@ export class AppComponent implements OnInit {
   public isMatch: boolean = true;
   public searchValue: string = "";
 
+  public showScroll: boolean = false;
 
   constructor(
     private router: Router,
@@ -33,11 +48,9 @@ export class AppComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.sideNavService.toolBarTitle$.pipe(
-      tap((title: string) => {
-        this.toolBarName = title;
-      })
-    ).subscribe();
+    setTimeout(() => {
+      (this.scrollContainer.nativeElement as HTMLElement).scroll({ top: 0, left: 0, behavior: 'smooth' }); // scroll up on load
+    }, 10);
 
     this.sideNavService.showSideNavContentStream$.pipe(
       tap((show: boolean) => {
@@ -77,6 +90,7 @@ export class AppComponent implements OnInit {
         if (seoData['title']) this.seoService.updateTitle(seoData['title']);
         if (seoData['metaTags']) this.seoService.updateMetaTags(seoData['metaTags']);
       }
+      this.toolBarName = data['title'] || "";
     });
   }
 
@@ -88,5 +102,10 @@ export class AppComponent implements OnInit {
       this.subjects = this.subjectService.subjects$.value;
       this.isMatch = true;
     }
+  }
+
+  public onScroll(event: Event) {
+    const target = event.target as HTMLElement;
+    this.showScroll = target.scrollTop >= (target.scrollHeight * 0.1);
   }
 }

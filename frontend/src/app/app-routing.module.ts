@@ -15,6 +15,7 @@ const routes: Routes = [
     path: '',
     component: HomepageComponent,
     data: {
+      title: "",
       seo: {
         title: 'Iswavle | ისწავლე ფრონტ ენდი',
         metaTags: [
@@ -32,6 +33,7 @@ const routes: Routes = [
     path: 'editor',
     component: EditorComponent,
     data: {
+      title: "ედითორი",
       seo: {
         title: 'Iswavle | ონლაინ ედითორი',
         metaTags: [
@@ -68,6 +70,7 @@ const routes: Routes = [
       }
     ],
     data: {
+      title: "თემები",
       seo: {
         title: 'Iswavle | ცნობარი ქართულად',
       }
@@ -77,6 +80,7 @@ const routes: Routes = [
     path: 'tasks',
     component: TasksComponent,
     data: {
+      title: "დავალებები",
       seo: {
         title: 'Iswavle | დავალებები ქართულად',
       }
@@ -86,6 +90,7 @@ const routes: Routes = [
     path: '404',
     component: NotfoundComponent,
     data: {
+      title: "გვერდი ვერ მოიძებნა",
       seo: {
         title: 'Iswavle | 404',
       }

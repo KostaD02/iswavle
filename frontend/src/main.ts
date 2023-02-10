@@ -15,18 +15,10 @@ import "codemirror/mode/css/css";
 import "codemirror/addon/hint/javascript-hint";
 import "codemirror/addon/hint/show-hint";
 
-import "codemirror/addon/edit/closetag";
-import "codemirror/addon/edit/matchbrackets";
-
 import "codemirror/addon/fold/xml-fold";
 import "codemirror/addon/fold/comment-fold";
-import "codemirror/addon/fold/brace-fold";
 import "codemirror/addon/fold/markdown-fold";
 import "codemirror/addon/fold/foldgutter";
-import "codemirror/addon/fold/brace-fold";
-
-import "codemirror/addon/lint/lint";
-import "codemirror/addon/lint/json-lint";
 
 if (environment.production) {
   enableProdMode();

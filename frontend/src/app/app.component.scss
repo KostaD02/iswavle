@@ -41,6 +41,12 @@ main {
 
   mat-sidenav-content {
     position: relative;
+    overflow: hidden;
+
+    .scroll-container {
+      height: 100%;
+      overflow: auto;
+    }
 
     mat-toolbar {
       position: fixed;

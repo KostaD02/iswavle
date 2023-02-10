@@ -41,15 +41,15 @@
               <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
             </button>
           </div>
-          <h1 *ngIf="!isRouteNotFound">{{ toolBarName | capitalize }}</h1>
-          <h1 *ngIf="isRouteNotFound">გვერდი ვერ მოიძებნა</h1>
+          <h1 *ngIf="toolBarName">{{ toolBarName }}</h1>
         </section>
       </mat-toolbar>
-      <section [ngClass]="{'margin-top-topic': showToolBar}">
+      <section (scroll)="onScroll($event)" [ngClass]="{'margin-top-topic': showToolBar}" class="scroll-container" #scrollContainer>
         <router-outlet></router-outlet>
       </section>
     </mat-sidenav-content>
   </mat-sidenav-container>
+  <app-scrollup [@fadeInOut]="showScroll ? 'in' : 'out'" [showScroll]="showScroll" [container]="scrollContainer"></app-scrollup>
   <footer>
     <app-footer></app-footer>
   </footer>

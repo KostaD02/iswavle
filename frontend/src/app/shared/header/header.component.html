@@ -1,7 +1,7 @@
 <section [ngClass]="{'after-resize-wrapper':(isHandset$ | async)}">
   <div class="wrapper">
     <aside class="left">
-      <a mat-button class="logo" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">ისწავლე</a>
+      <a mat-button class="logo" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">მთავარი</a>
     </aside>
     <aside class="middle" *ngIf="!(isHandset$ | async)">
       <nav>

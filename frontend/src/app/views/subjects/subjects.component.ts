@@ -34,7 +34,6 @@ export class SubjectsComponent implements OnInit, OnDestroy {
   public searchValue: string = "";
 
   public showScroll: boolean = false;
-  public animationOnSccroll: boolean = false;
 
   constructor(
     private headerService: HeaderService,
