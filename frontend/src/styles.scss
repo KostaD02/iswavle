@@ -30,6 +30,14 @@ body {
   list-style: none;
 }
 
+.mat-tab-body-wrapper {
+  height: 100% !important;
+}
+
+.CodeMirror {
+  height: 100%;
+}
+
 h3 {
   margin: 0px 0px 10px !important;
   font-weight: 600 !important;

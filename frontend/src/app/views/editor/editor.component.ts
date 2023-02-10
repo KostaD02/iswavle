@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild, ElementRef, OnDestroy, Renderer2 } from '@angular/core';
 import { WEB_LANGUAGES_DATA } from '../../constants';
 import { WebCodeContentEnum } from './../../enums';
 import { WebCodeContentInterface, CodeMirrorEmiterData, ResponseCodeInterface } from '../../interfaces';
@@ -252,6 +252,15 @@ export class EditorComponent implements OnInit, OnDestroy {
 
   public rotate() {
     this.rotateFrame = !this.rotateFrame;
+    const element = document.querySelector('.CodeMirror') as HTMLElement;
+    const secondElement = document.querySelector(".mat-tab-body-content") as HTMLElement;
+    if (this.rotateFrame){
+      element.style.height = '300px'; // ? set default size for code mirror
+      secondElement.style.overflowY = 'hidden';
+    } else {
+      element.style.height = '100%'; // ? set full size for code mirror
+      secondElement.style.overflowY = 'auto';
+    }
     setTimeout(() => {
       this.resize(); // * need setTimeout for calculate correct dimensions
     }, 100);

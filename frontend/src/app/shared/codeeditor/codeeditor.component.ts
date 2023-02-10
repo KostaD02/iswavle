@@ -1,5 +1,5 @@
 import { takeUntil } from 'rxjs/operators';
-import { Component, EventEmitter, Input, Output, OnInit, ChangeDetectionStrategy, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit, ChangeDetectionStrategy, ViewChild, AfterViewInit, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { WebCodeContentEnum } from '../../enums';
 import { CodeMirrorEmiterData, CodeMirrorOptions } from '../../interfaces';
 import { CodemirrorComponent } from "@ctrl/ngx-codemirror";
@@ -10,6 +10,7 @@ import { BehaviorSubject, Subject, tap } from 'rxjs';
   templateUrl: './codeeditor.component.html',
   styleUrls: ['./codeeditor.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None
 })
 export class CodeeditorComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('codeMirror') private codeEditorCmp!: CodemirrorComponent;
@@ -17,10 +18,10 @@ export class CodeeditorComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() previousCode: string = "";
   @Input() readOnly: boolean = false;
   @Input() panelOpenState: boolean = false;
-  @Input() language: string = "xml";
+  @Input() language: string = "htmlembedded";
   @Input() languageName: string = "HTML";
   @Input() stream$ = new BehaviorSubject<boolean>(false);
-  @Input() codeStream$ = new BehaviorSubject<string[]>(['','','']);
+  @Input() codeStream$ = new BehaviorSubject<string[]>(['', '', '']);
   @Input() index: number = 0;
 
   @Output() contentEmitter: EventEmitter<CodeMirrorEmiterData> = new EventEmitter();
@@ -38,13 +39,13 @@ export class CodeeditorComponent implements OnInit, AfterViewInit, OnDestroy {
     this.initRefreshStream();
     this.initCodeStream();
 
-    if (this.readOnly){
+    if (this.readOnly) {
       this.options['cursorHeight'] = 0;
     }
   }
 
   ngAfterViewInit(): void {
-    setTimeout(()=>{
+    setTimeout(() => {
       this.codeEditorCmp.codeMirror?.refresh(); // ? code mirror bug need refresh for overwrite line
     }, 1000);
   }
@@ -60,7 +61,7 @@ export class CodeeditorComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  private initOptions(){
+  private initOptions() {
     this.options = {
       mode: this.language,
       readOnly: this.readOnly,
@@ -81,7 +82,7 @@ export class CodeeditorComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  private initRefreshStream(){
+  private initRefreshStream() {
     this.stream$.pipe(
       tap((refresh) => {
         if (refresh) {
@@ -94,17 +95,17 @@ export class CodeeditorComponent implements OnInit, AfterViewInit, OnDestroy {
     ).subscribe();
   }
 
-  private initCodeStream(){
+  private initCodeStream() {
     this.codeStream$.pipe(
       tap((previousCode: string[]) => {
         this.content = previousCode[this.index];
         let content = '';
         let languageName = WebCodeContentEnum.HTML;
 
-        if (this.index === 0){
+        if (this.index === 0) {
           content = previousCode[0];
           languageName = WebCodeContentEnum.HTML;
-        } else if(this.index === 1){
+        } else if (this.index === 1) {
           content = previousCode[1];
           languageName = WebCodeContentEnum.CSS;
         } else {
@@ -112,8 +113,8 @@ export class CodeeditorComponent implements OnInit, AfterViewInit, OnDestroy {
           languageName = WebCodeContentEnum.JS;
         }
 
-        this.contentEmitter.emit({content, languageName});
-        if (this.previousCode){
+        this.contentEmitter.emit({ content, languageName });
+        if (this.previousCode) {
           this.content = this.previousCode;
         }
       }),

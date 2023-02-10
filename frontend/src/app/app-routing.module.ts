@@ -67,6 +67,9 @@ const routes: Routes = [
       {
         path: ':subject',
         component: SubjectComponent,
+        data: {
+          title: "თემები"
+        }
       }
     ],
     data: {
