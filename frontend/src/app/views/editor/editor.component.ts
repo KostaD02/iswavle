@@ -32,6 +32,9 @@ export class EditorComponent implements OnInit, OnDestroy {
   public showResultion: boolean = true;
   public rotateFrame: boolean = false;
 
+  private counter: number = 0;
+  private isReloading: boolean = false;
+
   public content: WebCodeContentInterface = {
     html: "",
     css: "",
@@ -53,6 +56,17 @@ export class EditorComponent implements OnInit, OnDestroy {
       event.preventDefault();
       this.downloadCode();
     }
+  }
+
+  @HostListener("window:beforeunload", ["$event"]) beforeUnload(event: any) {
+    if (!this.isReloading && this.counter >= 1) {
+      event.preventDefault();
+      event.returnValue = "Are you sure you want to leave?";
+    }
+  }
+
+  @HostListener("window:unload") unload() {
+    this.isReloading = true;
   }
 
   @HostListener('window:resize') resize() {
@@ -115,10 +129,11 @@ export class EditorComponent implements OnInit, OnDestroy {
       ! because of eval code execution , it's getting buggy + XSS security risks , redo later
       this.errorOutput();
     */
+    this.counter++;
   }
 
   private updateCode(): void {
-    console.clear();
+    //console.clear();
     this.visual = this.getCode();
   }
 
