@@ -3,7 +3,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter, map, mergeMap, Observable, tap } from 'rxjs';
 import { SubjectInterface } from './interfaces';
-import { HeaderService, SeoServiceService, SidenavService, SubjectService } from './services';
+import { HeaderService, SeoServiceService, SubjectService } from './services';
 
 @Component({
   selector: 'app-root',
@@ -25,8 +25,8 @@ import { HeaderService, SeoServiceService, SidenavService, SubjectService } from
 export class AppComponent implements OnInit {
   @ViewChild('scrollContainer', { static: true }) scrollContainer!: ElementRef;
 
-  public toolBarName: string = this.sideNavService.toolBarTitle;
-  public showToolBar: boolean = this.sideNavService.showSideNavContentStream$.value;
+  public toolBarName: string = "";
+
   public isRouteSubject: boolean = true;
   public isRouteNotFound: boolean = false;
 
@@ -41,7 +41,6 @@ export class AppComponent implements OnInit {
   constructor(
     private router: Router,
     private headerService: HeaderService,
-    private sideNavService: SidenavService,
     private subjectService: SubjectService,
     private activatedRoute: ActivatedRoute,
     private seoService: SeoServiceService
@@ -51,12 +50,6 @@ export class AppComponent implements OnInit {
     setTimeout(() => {
       (this.scrollContainer.nativeElement as HTMLElement).scroll({ top: 0, left: 0, behavior: 'smooth' }); // scroll up on load
     }, 10);
-
-    this.sideNavService.showSideNavContentStream$.pipe(
-      tap((show: boolean) => {
-        this.showToolBar = !show;
-      })
-    ).subscribe();
 
     this.subjectService.subjects$.asObservable().pipe(
       tap((subjects) => {

@@ -34,7 +34,7 @@
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
-      <mat-toolbar *ngIf="showToolBar" class="topic">
+      <mat-toolbar *ngIf="toolBarName" class="topic">
         <section>
           <div *ngIf="isRouteSubject">
             <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" *ngIf="isHandset$ | async">
@@ -44,7 +44,7 @@
           <h1 *ngIf="toolBarName">{{ toolBarName }}</h1>
         </section>
       </mat-toolbar>
-      <section (scroll)="onScroll($event)" [ngClass]="{'margin-top-topic': showToolBar}" class="scroll-container" #scrollContainer>
+      <section (scroll)="onScroll($event)" [ngClass]="{'margin-top-topic': toolBarName}" class="scroll-container" #scrollContainer>
         <router-outlet></router-outlet>
       </section>
     </mat-sidenav-content>

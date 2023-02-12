@@ -13,7 +13,14 @@ import { SubjectService } from 'src/app/services';
 export class SubjectComponent implements OnInit, OnDestroy {
   public readonly destroy$ = new Subject<void>();
 
-  subject!: SubjectInterface;
+  defaultSubject: SubjectInterface = {
+    name: '',
+    isSelectable: false,
+    subject: '',
+    route: ''
+  }
+
+  subject: SubjectInterface = this.defaultSubject;
   param: string = "";
 
   constructor(
@@ -41,12 +48,13 @@ export class SubjectComponent implements OnInit, OnDestroy {
       tap((subject) => {
         this.subject = subject;
         if (!this.subjectService.isSubjectLoaded) {
-          this.subject = this.subjectService.subjects$.value.find(subject => subject.route === this.param) || this.subjectService.subjects$.value[0];
+          this.subject = this.subjectService.subjects$.value.find(subject => subject.route === this.param) || this.defaultSubject;
         }
         if (this.subject.route !== this.param) {
           // ? adjusting value if user used load by history back
-          this.subject = this.subjectService.subjects$.value.find(subject => subject.route === this.param) || this.subjectService.subjects$.value[0];
+          this.subject = this.subjectService.subjects$.value.find(subject => subject.route === this.param) || this.defaultSubject;
         }
+        console.log(this.subject);
       }),
       takeUntil(this.destroy$)
     ).subscribe();
@@ -64,7 +72,10 @@ export class SubjectComponent implements OnInit, OnDestroy {
     const filterSelectableSubjects = this.subjectService.subjects$.value.filter(subject => subject.isSelectable);
     const currentSubjectIndex = filterSelectableSubjects.findIndex(subject => subject.route === this.subject.route);
     if (option === 1){
-      return (currentSubjectIndex === 0) ? '' : `/subject/${filterSelectableSubjects[currentSubjectIndex - option].route}`;
+      if (!filterSelectableSubjects[currentSubjectIndex - option]){
+        return '';
+      }
+      return (currentSubjectIndex === 0) ? '' : `/subject/${filterSelectableSubjects[currentSubjectIndex - option]?.route}`;
     } else {
       return (currentSubjectIndex + 1 === filterSelectableSubjects.length) ? '' : `/subject/${filterSelectableSubjects[currentSubjectIndex - option].route}`;
     }

@@ -48,7 +48,7 @@ export class HomepageComponent implements OnInit {
     this.gmailClickCount++;
 
     if (this.gmailClickCount >= 2) {
-      this.sweetAlert.displayModal(SweetAlertIcon.Info, "ინფორმაცია", "თუ პრობლემა არის მეილის გახსნასთან დაკავშირებით შეგიძლიათ თქვენით გამოაგზავნოთ მეილი ამ მისამართზე: kdautinishvili@gmail.com ან kdatunishvili@gmail.com");
+      this.sweetAlert.displayModal(SweetAlertIcon.Info, "ინფორმაცია", "თუ პრობლემა არის მეილის გახსნასთან დაკავშირებით შეგიძლიათ თქვენით გამოაგზავნოთ მეილი ამ მისამართზე: info@iswavle.com");
     }
   }
 }

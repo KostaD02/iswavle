@@ -8,7 +8,7 @@ import { NotfoundComponent } from './views/notfound/notfound.component';
 import { SubjectComponent } from './views/subjects/subject/subject.component';
 import { SubjectsComponent } from './views/subjects/subjects.component';
 
-const temporaryImageSource = "https://avatars.githubusercontent.com/u/68782786?v=4"; //!TODDO update it latter
+const imageSource = "../assets/images/meta_image.png";
 
 const routes: Routes = [
   {
@@ -20,11 +20,11 @@ const routes: Routes = [
         title: 'Iswavle | ისწავლე ფრონტ ენდი',
         metaTags: [
           { name: 'description', content: 'დოკუმენტაცია ქართულად, დავალებები ქართულად, ონლაინ ედითორი' },
-          { name: 'twitter:card', content: temporaryImageSource },
+          { name: 'twitter:card', content: imageSource },
           { name: 'keywords', content: KEYWORDS.join() },
           { property: 'og:title', content: 'შეისწავლე ფრონტენდი საკუთარი ტემპით' },
           { property: 'og:description', content: 'დოკუმენტაცია ქართულად, დავალებები ქართულად, ონლაინ ედითორი' },
-          { property: 'og:image', content: temporaryImageSource }
+          { property: 'og:image', content: imageSource }
         ]
       }
     },
@@ -39,10 +39,10 @@ const routes: Routes = [
         metaTags: [
           { name: 'description', content: 'ონლაინ ედითორი HTML/CSS/JS' },
           { name: 'keywords', content: KEYWORDS.join() },
-          { name: 'twitter:card', content: temporaryImageSource },
+          { name: 'twitter:card', content: imageSource },
           { property: 'og:title', content: 'ონლაინ ედითორი HTML CSS JS' },
           { property: 'og:description', content: 'ონლაინ ედითორი ვებისთვის' },
-          { property: 'og:image', content: temporaryImageSource }
+          { property: 'og:image', content: imageSource }
         ]
       }
     },
@@ -96,6 +96,9 @@ const routes: Routes = [
       title: "გვერდი ვერ მოიძებნა",
       seo: {
         title: 'Iswavle | 404',
+        metaTags: [
+          { name: "robots", content: "noindex" }
+        ]
       }
     },
   },

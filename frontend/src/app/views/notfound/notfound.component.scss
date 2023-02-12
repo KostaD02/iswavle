@@ -1,0 +1,11 @@
+section {
+  margin-top: 35px;
+  position: relative;
+
+  app-loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 55vh;
+  }
+}
