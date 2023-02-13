@@ -12,10 +12,9 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { MaterialModule } from './module';
 import { CapitalizePipe, HtmlTagPipe, NoSanitizePipe, SubjectFormatter } from './pipes';
-import { HeaderComponent, FooterComponent, CodeeditorComponent, ExampleCodeComponent, ExternalSourceComponent, SubjectCardComponent, ErrorOutputComponent, ScrollupComponent } from './shared';
+import { HeaderComponent, FooterComponent, CodeeditorComponent, ExampleCodeComponent, ExternalSourceComponent, SubjectCardComponent, ErrorOutputComponent, ScrollupComponent, LoaderComponent } from './shared';
 import { HomepageComponent, NotfoundComponent, EditorComponent, DefaultSubjectComponent, SubjectComponent, SubjectsComponent, TasksComponent } from './views';
 import { HtmlTagDirective } from './directives';
-import { LoaderComponent } from './shared/loader/loader.component';
 
 @NgModule({
   declarations: [

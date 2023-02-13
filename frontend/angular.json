@@ -26,7 +26,8 @@
             "assets": [
               "src/assets",
               "src/sitemap.xml",
-              "src/robot.txt"
+              "src/robots.txt",
+              "src/manifest.json"
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",

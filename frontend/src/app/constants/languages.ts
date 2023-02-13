@@ -2,22 +2,25 @@ export const WEB_LANGUAGES_DATA = [
   {
     name: 'HTML',
     language: 'htmlembedded',
-    icon: '<i class="fa-brands fa-html5"></i>',
+    icon: '../../assets/svgs/html5.svg',
     iconColor: "#DD4B25",
+    iconAltText: 'HTML Icon',
     readOnly: false,
   },
   {
     name: 'CSS',
     language: 'css',
-    icon: '<i class="fa-brands fa-css3-alt"></i>',
+    icon: '../../assets/svgs/css.svg',
     iconColor: "#254BDD",
+    iconAltText: 'CSS Icon',
     readOnly: false,
   },
   {
     name: 'JavaScript',
     language: 'javascript',
-    icon: '<i class="fa-brands fa-js"></i>',
+    icon: '../../assets/svgs/javascript.svg',
     iconColor: "#E8D44D",
+    iconAltText: 'JavaScript Icon',
     readOnly: false,
   }
 ];

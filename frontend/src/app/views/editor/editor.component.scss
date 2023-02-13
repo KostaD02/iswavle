@@ -31,7 +31,19 @@
 
     .header-content {
       display: flex;
+      align-items: center;
       gap: 5px;
+
+      .header-text {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        img {
+          height: 20px;
+          width: 20px;
+        }
+      }
 
       span {
         user-select: none;

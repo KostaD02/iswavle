@@ -6,3 +6,4 @@ export * from './external-source/external-source.component';
 export * from './subject-card/subject-card.component';
 export * from './error-output/error-output.component';
 export * from './scrollup/scrollup.component';
+export * from './loader/loader.component';

@@ -8,7 +8,7 @@ import { NotfoundComponent } from './views/notfound/notfound.component';
 import { SubjectComponent } from './views/subjects/subject/subject.component';
 import { SubjectsComponent } from './views/subjects/subjects.component';
 
-const imageSource = "../assets/images/meta_image.png";
+const imageSource = "https://raw.githubusercontent.com/KostaD02/iswavle/main/frontend/src/assets/images/meta_image.png";
 
 const routes: Routes = [
   {
