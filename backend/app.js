@@ -7,19 +7,29 @@ const bodyParser = require("body-parser");
 const { mongoose } = require("./db/mongoose");
 const { Error, Subject, CodeExample } = require("./db/models");
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const corsOption = {
   origin: [
-    'http://localhost:4200/', //! remove it later
-    'http://iswavle.com/',
-    'https://iswavle.com/',
-    'https://iswavle.web.app/',
-    'https://iswavle.firebaseapp.com/'
+    'http://localhost:4200', //! remove it later
+    'http://iswavle.com',
+    'https://iswavle.com',
+    'https://iswavle.web.app',
+    'https://iswavle.firebaseapp.com'
   ]
 }
 
+const corsMiddleware = (req, res, next) => {
+  const origin = req.headers.origin;
+  if (corsOption.origin.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  }
+  next();
+};
+
 app.use(bodyParser.json());
-app.use(cors(corsOption));
+app.use(corsMiddleware);
 
 app.get("/", (req, res) => {
   res.send('Welcome to education BE');
