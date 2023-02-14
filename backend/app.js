@@ -76,6 +76,7 @@ app.post('/subject', (req, res) => {
     prefix: req.body.prefix,
     translate: req.body.translate,
     data: req.body.data,
+    tags: req.body.tags,
     createdAt: new Date(),
     description: req.body.description
   });

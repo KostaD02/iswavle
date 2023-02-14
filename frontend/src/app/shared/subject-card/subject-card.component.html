@@ -5,4 +5,7 @@
   <div class="subject-description">
     <p>{{ subject.description }}</p>
   </div>
+  <div class="chips">
+    <app-chip *ngFor="let chip of subject.tags" [text]="chip"></app-chip>
+  </div>
 </a>

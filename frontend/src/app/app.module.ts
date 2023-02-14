@@ -12,7 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { MaterialModule } from './module';
 import { CapitalizePipe, HtmlTagPipe, NoSanitizePipe, SubjectFormatter } from './pipes';
-import { HeaderComponent, FooterComponent, CodeeditorComponent, ExampleCodeComponent, ExternalSourceComponent, SubjectCardComponent, ErrorOutputComponent, ScrollupComponent, LoaderComponent } from './shared';
+import { HeaderComponent, FooterComponent, CodeeditorComponent, ExampleCodeComponent, ExternalSourceComponent, SubjectCardComponent, ErrorOutputComponent, ScrollupComponent, LoaderComponent, ChipComponent } from './shared';
 import { HomepageComponent, NotfoundComponent, EditorComponent, DefaultSubjectComponent, SubjectComponent, SubjectsComponent, TasksComponent } from './views';
 import { HtmlTagDirective } from './directives';
 
@@ -40,6 +40,7 @@ import { HtmlTagDirective } from './directives';
     ScrollupComponent,
     TasksComponent,
     LoaderComponent,
+    ChipComponent,
   ],
   imports: [
     BrowserModule,

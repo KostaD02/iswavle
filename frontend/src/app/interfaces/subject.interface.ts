@@ -11,6 +11,7 @@ export interface SubjectInterface {
   data?: SubjectDataResponseInterface[];
   createdAt?: string;
   description?: string;
+  tags?: string[];
 }
 
 export interface SubjectCodeExampleInterface {

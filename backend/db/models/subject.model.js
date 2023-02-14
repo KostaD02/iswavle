@@ -46,6 +46,9 @@ const subjectSchema = new mongoose.Schema({
     type: String,
     minlength: 2,
     trim: true,
+  },
+  tags: {
+    type: Array
   }
 });
 

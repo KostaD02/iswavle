@@ -7,7 +7,7 @@ import { SubjectInterface } from '../../interfaces';
   templateUrl: './subject-card.component.html',
   styleUrls: ['./subject-card.component.scss']
 })
-export class SubjectCardComponent implements OnInit {
+export class SubjectCardComponent {
   @Input() subject: SubjectInterface = {
     name: "",
     isSelectable: false,
@@ -15,9 +15,8 @@ export class SubjectCardComponent implements OnInit {
     route: "",
     description:''
   }
-  constructor(private subjectService: SubjectService) { }
 
-  ngOnInit(): void {}
+  constructor(private subjectService: SubjectService) { }
 
   public activeSubject(){
     this.subjectService.activeSubject = this.subject;
