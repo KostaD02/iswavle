@@ -8,9 +8,18 @@ const { mongoose } = require("./db/mongoose");
 const { Error, Subject, CodeExample } = require("./db/models");
 
 const PORT = 3000;
+const corsOption = {
+  origin: [
+    'http://localhost:4200/', //! remove it later
+    'http://iswavle.com/',
+    'https://iswavle.com/',
+    'https://iswavle.web.app/',
+    'https://iswavle.firebaseapp.com/'
+  ]
+}
 
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors(corsOption));
 
 app.get("/", (req, res) => {
   res.send('Welcome to education BE');
@@ -68,15 +77,15 @@ app.post('/subject', (req, res) => {
   })
 });
 
-app.patch("/subject/:id",(req,res)=>{
+app.patch("/subject/:id", (req, res) => {
   Subject.findOneAndUpdate(
-    { _id: req.params.id},
+    { _id: req.params.id },
     {
       $set: req.body,
     }
   ).then(() => {
     res.sendStatus(200);
-  }).catch(()=>{
+  }).catch(() => {
     res.sendStatus(404);
   })
 });
