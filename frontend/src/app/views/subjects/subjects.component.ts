@@ -62,8 +62,8 @@ export class SubjectsComponent implements OnInit, OnDestroy {
   }
 
   public filterSubject() {
-    this.subject = this.subject.filter(subject => `${subject.prefix ?? ''} ${subject.name}`.trim().toLowerCase().includes(this.searchValue.toLowerCase()) && subject.isSelectable);
-    this.isMatch = this.subject.length >= 0;
+    this.subject = this.subjectService.subjects$.value.filter(subject => `${subject.prefix ?? ''} ${subject.name}`.trim().toLowerCase().includes(this.searchValue.toLowerCase()) && subject.isSelectable);
+    this.isMatch = this.subject.length > 0;
 
     if (!this.searchValue || this.searchValue.length === 0) {
       this.subject = this.subjectService.subjects$.value;

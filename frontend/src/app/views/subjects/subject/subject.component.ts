@@ -54,7 +54,6 @@ export class SubjectComponent implements OnInit, OnDestroy {
           // ? adjusting value if user used load by history back
           this.subject = this.subjectService.subjects$.value.find(subject => subject.route === this.param) || this.defaultSubject;
         }
-        console.log(this.subject);
       }),
       takeUntil(this.destroy$)
     ).subscribe();

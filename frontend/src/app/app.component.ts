@@ -88,8 +88,8 @@ export class AppComponent implements OnInit {
   }
 
   public filterSubject() {
-    this.subjects = this.subjects.filter(subject => `${subject.prefix ?? ''} ${subject.name}`.trim().toLowerCase().includes(this.searchValue.toLowerCase()) && subject.isSelectable);
-    this.isMatch = this.subjects.length >= 0;
+    this.subjects = this.subjectService.subjects$.value.filter(subject => `${subject.prefix ?? ''} ${subject.name}`.trim().toLowerCase().includes(this.searchValue.toLowerCase()) && subject.isSelectable);
+    this.isMatch = this.subjects.length > 0;
 
     if (!this.searchValue || this.searchValue.length === 0) {
       this.subjects = this.subjectService.subjects$.value;
