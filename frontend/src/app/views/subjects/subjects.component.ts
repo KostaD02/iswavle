@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy} from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Observable, Subject } from 'rxjs';
 import { tap, takeUntil } from 'rxjs/operators';
@@ -62,7 +62,11 @@ export class SubjectsComponent implements OnInit, OnDestroy {
   }
 
   public filterSubject() {
-    this.subject = this.subjectService.subjects$.value.filter(subject => `${subject.prefix ?? ''} ${subject.name}`.trim().toLowerCase().includes(this.searchValue.toLowerCase()) && subject.isSelectable);
+    this.subject = this.subjectService.subjects$.value.filter(subject =>
+      (`${subject.prefix ?? ''} ${subject.name}`.trim().toLowerCase().includes(this.searchValue.toLowerCase())
+        || subject.tags?.map(chip => chip.toLocaleLowerCase()).filter(text => text.search(this.searchValue.toLowerCase()) !== -1).length)
+      && subject.isSelectable);
+
     this.isMatch = this.subject.length > 0;
 
     if (!this.searchValue || this.searchValue.length === 0) {
@@ -71,7 +75,7 @@ export class SubjectsComponent implements OnInit, OnDestroy {
     }
   }
 
-  public onScroll(event: Event){
+  public onScroll(event: Event) {
     const target = event.target as HTMLElement;
     this.showScroll = target.scrollTop >= (target.scrollHeight * 0.1);
   }
