@@ -59,6 +59,8 @@ export class SubjectsComponent implements OnInit, OnDestroy {
 
   public activeSubject(subject: SubjectInterface) {
     this.subjectService.activeSubject = subject;
+    this.searchValue = "";
+    this.filterSubject();
   }
 
   public filterSubject() {

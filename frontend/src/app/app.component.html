@@ -22,7 +22,7 @@
         </div>
         <div *ngFor="let subject of subjects">
           <div *ngIf="subject.isSelectable;else headerTopic">
-            <a mat-list-item routerLink="subject/{{subject.route}}" (click)="drawer.close()">{{ subject | subjectFormatter}}</a>
+            <a mat-list-item routerLink="subject/{{subject.route}}" (click)="drawer.close(); clearSearch()">{{ subject | subjectFormatter}}</a>
           </div>
           <ng-template #headerTopic>
             <mat-toolbar>{{ subject | subjectFormatter }}</mat-toolbar>

@@ -105,4 +105,9 @@ export class AppComponent implements OnInit {
     const target = event.target as HTMLElement;
     this.showScroll = target.scrollTop >= (target.scrollHeight * 0.1);
   }
+
+  public clearSearch() {
+    this.searchValue = "";
+    this.filterSubject();
+  }
 }
