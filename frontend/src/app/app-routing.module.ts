@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { KEYWORDS } from './constants';
-import { DefaultSubjectComponent, TasksComponent } from './views';
+import { SubjectGuard } from './guards';
+import { CreateSubjectComponent, DefaultSubjectComponent, TasksComponent } from './views';
 import { EditorComponent } from './views/editor/editor.component';
 import { HomepageComponent } from './views/homepage/homepage.component';
 import { NotfoundComponent } from './views/notfound/notfound.component';
@@ -107,6 +108,20 @@ const routes: Routes = [
         ]
       }
     },
+  },
+  {
+    path: 'create-subject',
+    component: CreateSubjectComponent,
+    canActivate: [SubjectGuard],
+    data: {
+      title: "შექმენი თემა",
+      seo: {
+        title: 'Iswavle | შექმენი თემა',
+        metaTags: [
+          { name: "robots", content: "noindex" }
+        ]
+      }
+    }
   },
   {
     path: '404',
