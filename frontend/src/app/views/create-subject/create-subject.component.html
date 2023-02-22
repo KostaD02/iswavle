@@ -1,1 +1,119 @@
-<p>create-subject works!</p>
+<form [formGroup]="subject">
+  <section class="static">
+    <div class="wrap">
+      <mat-form-field appearance="fill">
+        <mat-label>თემის სახელი (name)</mat-label>
+        <input matInput formControlName="name">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>მოსანიშნია (isSelectable)</mat-label>
+        <mat-select formControlname="isSelectable">
+          <mat-option value="true">True</mat-option>
+          <mat-option value="fales">False</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>თემა (data.language)</mat-label>
+        <mat-select formControlname="subject">
+          <mat-option value="html">html</mat-option>
+          <mat-option value="css">css</mat-option>
+          <mat-option value="javascript">javascript</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="wrap">
+      <mat-form-field appearance="fill">
+        <mat-label>მისამართი (route)</mat-label>
+        <input matInput formControlName="route">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>თავსართი (prefix)</mat-label>
+        <mat-select formControlname="prefix">
+          <mat-option value="HTML">HTML</mat-option>
+          <mat-option value="CSS">CSS</mat-option>
+          <mat-option value="JS">JS</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <mat-form-field appearance="fill">
+      <mat-label>აღწერა (description)</mat-label>
+      <textarea formControlname="description" matInput placeholder="ქარდში რაც გამოდის"></textarea>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>თეგები (tags)</mat-label>
+      <input matInput formControlName="tags" placeholder="სფეისით დაწერე თითო სიტყვა">
+    </mat-form-field>
+  </section>
+  <section class="generated">
+    <div class="buttons">
+      <button (click)="addData()" mat-raised-button color="primary">დააგენერირე კონტენტი</button>
+      <button (click)="createForm()" mat-raised-button color="primary">შექმენი თემა</button>
+    </div>
+    <hr>
+    <article class="wrap" formArrayName="data">
+      <div *ngFor="let data of data.controls;let i = index" [formGroupName]="i" class="info">
+        <div class="content-header">
+          <h3># {{i+1}}</h3>
+          <button (click)="removeData(i)" mat-raised-button color="warn">წაშალე</button>
+        </div>
+        <div class="content">
+          <h3>ინფორმაცია</h3>
+          <mat-form-field appearance="fill">
+            <mat-label>ნეითივის კოდია (isNativeElement)</mat-label>
+            <mat-select formControlname="isNativeElement">
+              <mat-option value="true">True</mat-option>
+              <mat-option value="fales">False</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>მაგალითი კოდის (isCodeExample)</mat-label>
+            <mat-select formControlname="isCodeExample">
+              <mat-option value="true">True</mat-option>
+              <mat-option value="fales">False</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>კონტენტი (content)</mat-label>
+            <textarea formControlname="content" matInput placeholder="HTML კონტენტი"></textarea>
+          </mat-form-field>
+
+          <h3>ნავიგაცია</h3>
+          <div class="group">
+            <mat-form-field appearance="fill">
+              <mat-label>ნავიგაციის სახელი (navigation.name)</mat-label>
+              <input matInput formControlName="navigationName">
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>ნავიგაციის id (navigation.id)</mat-label>
+              <input matInput formControlName="navigationId">
+            </mat-form-field>
+          </div>
+
+          <h3>მაგალითი კოდის</h3>
+          <div class="group">
+            <mat-form-field appearance="fill">
+              <mat-label>სათაური (data.title)</mat-label>
+              <input matInput formControlName="dataTitle">
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>კოდი (data.code)</mat-label>
+              <input matInput formControlName="dataCode">
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>ენა (data.language)</mat-label>
+              <mat-select formControlname="dataLanguage">
+                <mat-option value="htmlembedded">html</mat-option>
+                <mat-option value="css">css</mat-option>
+                <mat-option value="javascript">javascript</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>მისამართი (data.routerLink)</mat-label>
+              <input matInput formControlName="dataRouterLink">
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </article>
+  </section>
+</form>
