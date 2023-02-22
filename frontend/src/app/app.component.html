@@ -16,7 +16,7 @@
           <mat-list-item role="search">
             <mat-form-field>
               <mat-label>ფილტრაცია</mat-label>
-              <input [(ngModel)]="searchValue" (input)="filterSubject()" matInput placeholder="მაგალითად HTML">
+              <input [(ngModel)]="searchValue" (input)="filterSubject()" matInput inputmode="none" placeholder="მაგალითად HTML">
             </mat-form-field>
           </mat-list-item>
         </div>
@@ -44,7 +44,7 @@
           <h1 *ngIf="toolBarName">{{ toolBarName }}</h1>
         </section>
       </mat-toolbar>
-      <section (scroll)="onScroll($event)" [ngClass]="{'margin-top-topic': toolBarName}" class="scroll-container" #scrollContainer>
+      <section (scroll)="onScroll($event)" [ngClass]="{'margin-top-topic': toolBarName, 'adjust': isRouteSubject}" class="scroll-container" #scrollContainer>
         <router-outlet></router-outlet>
       </section>
     </mat-sidenav-content>

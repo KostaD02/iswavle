@@ -40,7 +40,7 @@ import { HtmlTagDirective } from './directives';
     ScrollupComponent,
     TasksComponent,
     LoaderComponent,
-    ChipComponent,
+    ChipComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +51,7 @@ import { HtmlTagDirective } from './directives';
     CodemirrorModule,
     ScrollingModule,
     NgxSkeletonLoaderModule,
-    HttpClientModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

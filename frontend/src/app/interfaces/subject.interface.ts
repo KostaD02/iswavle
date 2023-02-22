@@ -26,4 +26,10 @@ export interface SubjectDataResponseInterface {
   isCodeExample: boolean,
   content: string;
   data?: SubjectCodeExampleInterface;
+  navigation?: SubjectIdInterface;
+}
+
+export interface SubjectIdInterface {
+  name: string;
+  id: string;
 }

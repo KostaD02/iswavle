@@ -21,6 +21,47 @@ section {
   display: grid;
   grid-template-columns: 1fr;
   row-gap: 15px;
+
+  .wrapper {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    column-gap: 25px;
+
+    .right {
+
+      ul {
+        position: sticky;
+        top: 35px;
+        list-style: none;
+        padding-left: 0px;
+        margin: 0px;
+
+        li {
+          margin: 0px;
+
+          a {
+            border-left: 2px solid #cdcdcd;
+            color: #4e4e4e;
+            display: block;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            cursor: pointer;
+
+            &:hover {
+              color: var(--primary-color);
+            }
+          }
+
+          a.active {
+            background-color: #0085f230;
+            border-left: 2px solid var(--primary-color);
+            color: black;
+            font-weight: 500;
+          }
+        }
+      }
+    }
+  }
 }
 
 .example-code {
@@ -49,6 +90,17 @@ app-example-code {
   justify-content: space-between;
 }
 
+@media screen and (max-width: 599px) {
+  .content {
+    .wrapper {
+      grid-template-columns: 1fr;
+
+      .right {
+        display: none;
+      }
+    }
+  }
+}
 
 @media screen and (max-width: 425px) {
   section{

@@ -9,6 +9,10 @@
   --primary-font: Roboto, "Helvetica Neue", sans-serif;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   // TODO update px values
   margin: 0px;

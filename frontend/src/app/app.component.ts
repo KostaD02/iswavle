@@ -4,6 +4,7 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter, map, mergeMap, Observable, tap } from 'rxjs';
 import { SubjectInterface } from './interfaces';
 import { HeaderService, SeoServiceService, SubjectService } from './services';
+import { DEFAULT_LOG_DATA } from './constants';
 
 @Component({
   selector: 'app-root',
@@ -24,6 +25,7 @@ import { HeaderService, SeoServiceService, SubjectService } from './services';
 })
 export class AppComponent implements OnInit {
   @ViewChild('scrollContainer', { static: true }) scrollContainer!: ElementRef;
+  private readonly DEFAULT_LOG_DATA = DEFAULT_LOG_DATA;
 
   public toolBarName: string = "";
 
@@ -47,6 +49,7 @@ export class AppComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.initDefaultLog();
     setTimeout(() => {
       (this.scrollContainer.nativeElement as HTMLElement).scroll({ top: 0, left: 0, behavior: 'smooth' }); // scroll up on load
     }, 10);
@@ -109,5 +112,11 @@ export class AppComponent implements OnInit {
   public clearSearch() {
     this.searchValue = "";
     this.filterSubject();
+  }
+
+  private initDefaultLog(){
+    DEFAULT_LOG_DATA.forEach(data => {
+      console.log(data.message, ...data.style);
+    });
   }
 }

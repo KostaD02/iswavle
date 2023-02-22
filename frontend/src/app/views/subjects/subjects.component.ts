@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Observable, Subject } from 'rxjs';
 import { tap, takeUntil } from 'rxjs/operators';
@@ -23,7 +23,7 @@ import { HeaderService, SubjectService, WebRequestsService } from '../../service
     ])
   ],
 })
-export class SubjectsComponent implements OnInit, OnDestroy {
+export class SubjectsComponent implements OnInit ,OnDestroy {
   public readonly isHandset$: Observable<boolean> = this.headerService.isHandset$;
   public readonly destroy$ = new Subject<void>();
 

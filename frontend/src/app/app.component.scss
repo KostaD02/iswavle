@@ -48,6 +48,10 @@ main {
       overflow: auto;
     }
 
+    .adjust {
+      height: auto;
+    }
+
     mat-toolbar {
       position: fixed;
       z-index: 20;

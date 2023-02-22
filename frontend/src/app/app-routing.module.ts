@@ -68,7 +68,10 @@ const routes: Routes = [
         path: ':subject',
         component: SubjectComponent,
         data: {
-          title: "თემები"
+          title: "თემები",
+          seo: {
+            title: 'Iswavle | ცნობარი ქართულად'
+          }
         }
       }
     ],
@@ -76,6 +79,14 @@ const routes: Routes = [
       title: "თემები",
       seo: {
         title: 'Iswavle | ცნობარი ქართულად',
+        metaTags: [
+          { name: 'description', content: 'ცნობარი ქართულად HTML/CSS/JS' },
+          { name: 'keywords', content: KEYWORDS.join() },
+          { name: 'twitter:card', content: imageSource },
+          { property: 'og:title', content: 'ცნობარი ქართლად HTML CSS JS' },
+          { property: 'og:description', content: 'შეისწავლე შენი ტემპით' },
+          { property: 'og:image', content: imageSource }
+        ]
       }
     },
   },
@@ -86,6 +97,14 @@ const routes: Routes = [
       title: "დავალებები",
       seo: {
         title: 'Iswavle | დავალებები ქართულად',
+        metaTags: [
+          { name: 'description', content: 'დავალებები HTML/CSS/JS' },
+          { name: 'keywords', content: KEYWORDS.join() },
+          { name: 'twitter:card', content: imageSource },
+          { property: 'og:title', content: 'დავალებები ქართლად HTML CSS JS' },
+          { property: 'og:description', content: 'შეასრულე ფრონტ-ენდის დავალებები' },
+          { property: 'og:image', content: imageSource }
+        ]
       }
     },
   },
@@ -110,7 +129,11 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    scrollPositionRestoration: 'enabled',
+    anchorScrolling: 'enabled',
+    onSameUrlNavigation: 'reload',
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

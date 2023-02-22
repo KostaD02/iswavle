@@ -8,15 +8,28 @@
   <ng-template #found>
     <h2>{{subject.prefix}} {{subject.name}}</h2>
     <article class="content">
-      <div class="wrap" *ngFor="let subjectResponse of subject.data">
-        <div *ngIf="subjectResponse.isNativeElement" [innerHTML]="subjectResponse.content | noSanitize"></div>
-        <div *ngIf="!subjectResponse.isNativeElement && subjectResponse.isCodeExample" class="example-code">
-          <h3 *ngIf="subjectResponse.data?.title">{{subjectResponse.data?.title}}</h3>
-          <app-example-code class="code" [language]="subjectResponse.data?.language || ''" [code]="subjectResponse.data?.code || ''"></app-example-code>
-          <div *ngIf="subjectResponse.data?.routerLink">
-            <button mat-raised-button color="primary" [routerLink]="subjectResponse.data?.routerLink">გამოიყენე კოდი</button>
+      <div class="wrapper">
+        <aside class="left">
+          <div class="wrap" *ngFor="let subjectResponse of subject.data" [id]="subjectResponse.navigation?.id ?? ''">
+            <div *ngIf="subjectResponse.isNativeElement" [innerHTML]="subjectResponse.content | noSanitize"></div>
+            <div *ngIf="!subjectResponse.isNativeElement && subjectResponse.isCodeExample" class="example-code">
+              <h3 *ngIf="subjectResponse.data?.title">{{subjectResponse.data?.title}}</h3>
+              <app-example-code class="code" [language]="subjectResponse.data?.language || ''" [code]="subjectResponse.data?.code || ''"></app-example-code>
+              <div *ngIf="subjectResponse.data?.routerLink">
+                <button mat-raised-button color="primary" [routerLink]="subjectResponse.data?.routerLink">გამოიყენე კოდი</button>
+              </div>
+            </div>
           </div>
-        </div>
+        </aside>
+        <aside class="right">
+          <ul>
+            <ng-container *ngFor="let subjectResponse of subject.data">
+              <li *ngIf="subjectResponse.navigation?.name">
+                <a [ngClass]="{'active': spySubject === subjectResponse.navigation?.id}" [routerLink]="'.'" [fragment]="subjectResponse.navigation?.id">{{subjectResponse.navigation?.name}}</a>
+              </li>
+            </ng-container>
+          </ul>
+        </aside>
       </div>
       <div class="buttons">
         <button *ngIf="backRoute()" mat-raised-button color="primary" [routerLink]="backRoute()">უკანა თემა</button>
