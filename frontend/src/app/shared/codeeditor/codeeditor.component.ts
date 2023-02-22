@@ -1,9 +1,9 @@
-import { takeUntil } from 'rxjs/operators';
 import { Component, EventEmitter, Input, Output, OnInit, ChangeDetectionStrategy, ViewChild, AfterViewInit, OnDestroy, ViewEncapsulation } from '@angular/core';
-import { WebCodeContentEnum } from '../../enums';
-import { CodeMirrorEmiterData, CodeMirrorOptions } from '../../interfaces';
 import { CodemirrorComponent } from "@ctrl/ngx-codemirror";
 import { BehaviorSubject, Subject, tap } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { CodeMirrorEmiterData, CodeMirrorOptions } from '../../interfaces';
+import { WebCodeContentEnum } from '../../enums';
 
 @Component({
   selector: 'app-codeeditor',

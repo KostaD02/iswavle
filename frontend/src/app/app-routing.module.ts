@@ -2,12 +2,16 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { KEYWORDS } from './constants';
 import { SubjectGuard } from './guards';
-import { CreateSubjectComponent, DefaultSubjectComponent, TasksComponent } from './views';
-import { EditorComponent } from './views/editor/editor.component';
-import { HomepageComponent } from './views/homepage/homepage.component';
-import { NotfoundComponent } from './views/notfound/notfound.component';
-import { SubjectComponent } from './views/subjects/subject/subject.component';
-import { SubjectsComponent } from './views/subjects/subjects.component';
+import {
+  CreateSubjectComponent,
+  DefaultSubjectComponent,
+  EditorComponent,
+  HomepageComponent,
+  NotfoundComponent,
+  SubjectComponent,
+  SubjectsComponent,
+  TasksComponent
+} from './views';
 
 const imageSource = "https://raw.githubusercontent.com/KostaD02/iswavle/main/frontend/src/assets/images/meta_image.png";
 

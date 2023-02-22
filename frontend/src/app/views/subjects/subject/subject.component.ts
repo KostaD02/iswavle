@@ -2,8 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil, tap } from 'rxjs/operators';
-import { SubjectInterface } from 'src/app/interfaces';
-import { SeoServiceService, SubjectService } from 'src/app/services';
+import { SubjectInterface } from '../../../interfaces';
+import { SeoServiceService, SubjectService } from '../../../services';
 
 @Component({
   selector: 'app-subject',

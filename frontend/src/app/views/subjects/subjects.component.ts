@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Observable, Subject } from 'rxjs';
 import { tap, takeUntil } from 'rxjs/operators';

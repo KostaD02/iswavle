@@ -12,10 +12,10 @@ export class InformationService {
   public readonly keywords: string;
 
   constructor() {
-    this.title = "Iswavle"; //change later
-    this.favicon = "https://avatars.githubusercontent.com/u/68782786?v=4"; //change later
-    this.description = "Learn by yourself"; //change later
-    this.ogImageUrl = "https://www.educatetogether.ie/app/uploads/2019/02/EthicalEducationUpdated.png"; // !change it later
+    this.title = "iswavle.com | ცნობარი ქართულად";
+    this.favicon = "https://iswavle.com/assets/images/banner_image.png";
+    this.description = "შეისწავლე შენით";
+    this.ogImageUrl = "https://raw.githubusercontent.com/KostaD02/iswavle/main/frontend/src/assets/images/meta_image.png";
     this.keywords = KEYWORDS.join();
   }
 }

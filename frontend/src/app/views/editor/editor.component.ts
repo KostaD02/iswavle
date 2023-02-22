@@ -1,13 +1,13 @@
-import { Component, HostListener, OnInit, ViewChild, ElementRef, OnDestroy, Renderer2 } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
+import { Clipboard } from '@angular/cdk/clipboard';
+import { MatTabGroup } from '@angular/material/tabs';
+import { Router } from '@angular/router';
+import { takeUntil, tap } from 'rxjs/operators';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { WEB_LANGUAGES_DATA } from '../../constants';
 import { WebCodeContentEnum } from './../../enums';
 import { WebCodeContentInterface, CodeMirrorEmiterData, ResponseCodeInterface } from '../../interfaces';
 import { SweetAlertModalsService, InformationService, WebRequestsService } from '../../services';
-import { BehaviorSubject, Subject } from 'rxjs';
-import { takeUntil, tap } from 'rxjs/operators';
-import { Clipboard } from '@angular/cdk/clipboard';
-import { MatTabGroup } from '@angular/material/tabs';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-editor',
@@ -140,6 +140,7 @@ export class EditorComponent implements OnInit, OnDestroy {
   private getCode(): string {
     return `
       <!-- Created at : ${location.href} -->
+      <!-- კოდი დაგენერირებულია : ${location.href} -->
       <!DOCTYPE html>
       <html lang="en">
         <head>
@@ -171,6 +172,7 @@ export class EditorComponent implements OnInit, OnDestroy {
         <body>
           ${this.content.html}
           <script>${this.content.javascript}</script>
+
         </body>
       </html>
     `;
