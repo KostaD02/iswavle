@@ -7,14 +7,14 @@
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>მოსანიშნია (isSelectable)</mat-label>
-        <mat-select formControlname="isSelectable">
+        <mat-select formControlName="isSelectable">
           <mat-option value="true">True</mat-option>
           <mat-option value="fales">False</mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field appearance="fill">
-        <mat-label>თემა (data.language)</mat-label>
-        <mat-select formControlname="subject">
+        <mat-label>თემა (subject)</mat-label>
+        <mat-select formControlName="subject">
           <mat-option value="html">html</mat-option>
           <mat-option value="css">css</mat-option>
           <mat-option value="javascript">javascript</mat-option>
@@ -37,7 +37,7 @@
     </div>
     <mat-form-field appearance="fill">
       <mat-label>აღწერა (description)</mat-label>
-      <textarea formControlname="description" matInput placeholder="ქარდში რაც გამოდის"></textarea>
+      <textarea formControlName="description" matInput placeholder="ქარდში რაც გამოდის"></textarea>
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>თეგები (tags)</mat-label>
@@ -60,21 +60,21 @@
           <h3>ინფორმაცია</h3>
           <mat-form-field appearance="fill">
             <mat-label>ნეითივის კოდია (isNativeElement)</mat-label>
-            <mat-select formControlname="isNativeElement">
+            <mat-select formControlName="isNativeElement">
               <mat-option value="true">True</mat-option>
               <mat-option value="fales">False</mat-option>
             </mat-select>
           </mat-form-field>
           <mat-form-field appearance="fill">
             <mat-label>მაგალითი კოდის (isCodeExample)</mat-label>
-            <mat-select formControlname="isCodeExample">
+            <mat-select formControlName="isCodeExample">
               <mat-option value="true">True</mat-option>
               <mat-option value="fales">False</mat-option>
             </mat-select>
           </mat-form-field>
           <mat-form-field appearance="fill">
             <mat-label>კონტენტი (content)</mat-label>
-            <textarea formControlname="content" matInput placeholder="HTML კონტენტი"></textarea>
+            <textarea formControlName="content" matInput placeholder="HTML კონტენტი"></textarea>
           </mat-form-field>
 
           <h3>ნავიგაცია</h3>
@@ -101,7 +101,7 @@
             </mat-form-field>
             <mat-form-field appearance="fill">
               <mat-label>ენა (data.language)</mat-label>
-              <mat-select formControlname="dataLanguage">
+              <mat-select formControlName="dataLanguage">
                 <mat-option value="htmlembedded">html</mat-option>
                 <mat-option value="css">css</mat-option>
                 <mat-option value="javascript">javascript</mat-option>

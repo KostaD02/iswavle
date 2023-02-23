@@ -1,17 +1,38 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { catchError, tap, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { WebRequestsService, SweetAlertModalsService } from './../../services';
+import { SubjectDataResponseInterface, SubjectInterface } from '../../interfaces';
+import { SweetAlertIcon } from '../../enums';
 
 @Component({
   selector: 'app-create-subject',
   templateUrl: './create-subject.component.html',
   styleUrls: ['./create-subject.component.scss']
 })
-export class CreateSubjectComponent {
-
+export class CreateSubjectComponent implements OnDestroy {
+  public readonly destroy$ = new Subject<void>();
   public subject: FormGroup = this.fb.group({});
+  public count: number = 0;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private webRequestsService: WebRequestsService,
+    private sweetAlertModalsService: SweetAlertModalsService
+  ) {
     this.initForm();
+    this.webRequestsService.get('subjects').pipe(
+      tap(result => {
+        const response = result as SubjectInterface[];
+        this.count = response.length + 1;
+      }),
+      takeUntil(this.destroy$)
+    ).subscribe();
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
   }
 
   private initForm(){
@@ -33,7 +54,7 @@ export class CreateSubjectComponent {
 
   public addData(){
     this.data.push(this.fb.group({
-      isNativeElement: new FormControl(false, Validators.required),
+      isNativeElement: new FormControl(true, Validators.required),
       isCodeExample: new FormControl(false, Validators.required),
       content: new FormControl(null, Validators.required),
 
@@ -53,14 +74,17 @@ export class CreateSubjectComponent {
 
   public createForm(){
     const data = {
+      index: 0,
       name: this.subject.value.name,
       isSelectable: this.subject.value.isSelectable,
       subject: this.subject.value.subject,
       route: this.subject.value.route,
       prefix: this.subject.value.prefix,
       description: this.subject.value.description,
+      translate: [], // ? is this necessary
+      tags: this.subject.value.tags.split(" "),
       data: this.subject.value.data.map((element: any) => {
-        return {
+        const data: SubjectDataResponseInterface = {
           isNativeElement: element.isNativeElement,
           isCodeExample: element.isCodeExample,
           content: element.content,
@@ -75,10 +99,27 @@ export class CreateSubjectComponent {
             id: element.navigationId
           }
         }
+
+        if (!data.isCodeExample && data.isNativeElement){
+          delete data.data;
+        }
+
+        return data;
       }),
-      tags: this.subject.value.tags.split(" "),
     };
-    console.log(data);
+
+    this.webRequestsService.post('subject', data).pipe(
+      tap(result => {
+        this.sweetAlertModalsService.displayModal(SweetAlertIcon.Success,'წარამტებით დაემატა', `დამატებული ობიექტი დალოგილია`);
+        console.log(result);
+      }),
+      catchError(err => {
+        this.sweetAlertModalsService.displayModal(SweetAlertIcon.Error, 'არასწორი რექუესტი','');
+        console.log(err);
+        throw 'incorrect request';
+      }),
+      takeUntil(this.destroy$)
+    ).subscribe();
   }
 
 }
