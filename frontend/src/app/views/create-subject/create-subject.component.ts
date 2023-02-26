@@ -76,7 +76,7 @@ export class CreateSubjectComponent implements OnDestroy {
     const data = {
       index: 0,
       name: this.subject.value.name,
-      isSelectable: this.subject.value.isSelectable,
+      isSelectable: this.subject.value.isSelectable === 'true' ? true : false,
       subject: this.subject.value.subject,
       route: this.subject.value.route,
       prefix: this.subject.value.prefix,
@@ -85,8 +85,8 @@ export class CreateSubjectComponent implements OnDestroy {
       tags: this.subject.value.tags.split(" "),
       data: this.subject.value.data.map((element: any) => {
         const data: SubjectDataResponseInterface = {
-          isNativeElement: element.isNativeElement,
-          isCodeExample: element.isCodeExample,
+          isNativeElement: element.isNativeElement === 'true' ? true : false,
+          isCodeExample: element.isCodeExample === 'true' ? true : false,
           content: element.content,
           data: {
             title: element.dataTitle,
