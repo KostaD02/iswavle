@@ -1,0 +1,1 @@
+export const DEFAULT_IMAGE_SRC = "https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-1-scaled.png";

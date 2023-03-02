@@ -1,7 +1,6 @@
-import { Component, OnInit, OnDestroy, ViewChild, TemplateRef, ViewContainerRef } from '@angular/core';
+import { SweetAlertModalsService } from './../../../services/sweet-alert-modals.service';
+import { Component, OnInit, OnDestroy} from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { Overlay, OverlayRef } from '@angular/cdk/overlay';
-import { TemplatePortal } from '@angular/cdk/portal';
 import { Subject } from 'rxjs';
 import { takeUntil, tap } from 'rxjs/operators';
 import { SubjectInterface } from '../../../interfaces';
@@ -11,12 +10,8 @@ import { SeoServiceService, SubjectService } from '../../../services';
   selector: 'app-subject',
   templateUrl: './subject.component.html',
   styleUrls: ['./subject.component.scss'],
-  providers: [{ provide: ViewContainerRef, useExisting: ViewContainerRef }]
 })
 export class SubjectComponent implements OnInit, OnDestroy {
-  @ViewChild('imageTemplate', { static: true }) imageTemplate!: TemplateRef<any>;
-
-  private overlayRef!: OverlayRef;
   public readonly destroy$ = new Subject<void>();
 
   public spySubject: string = "";
@@ -35,8 +30,7 @@ export class SubjectComponent implements OnInit, OnDestroy {
     private router: Router,
     private subjectService: SubjectService,
     private seoService: SeoServiceService,
-    private overlay: Overlay,
-    private viewContainerRef: ViewContainerRef
+    private sweetAlertService: SweetAlertModalsService
   ) { }
 
   ngOnInit(): void {
@@ -60,7 +54,6 @@ export class SubjectComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subject.data = [];
     this.destroy$.next();
   }
 
@@ -129,15 +122,23 @@ export class SubjectComponent implements OnInit, OnDestroy {
 
     spyData.forEach((element) => {
       const htmlElement = document.getElementById(element.navigation!.id) as Element;
-      observer.observe(htmlElement);
+      if (htmlElement) {
+        observer.observe(htmlElement);
+      }
     });
+
+    this.destroy$.pipe(
+      tap(() => {
+        observer.disconnect();
+      })
+    ).subscribe();
   }
 
   private initImgClick() {
     if (this.subject.name !== '' && this.subject.route !== '' && this.subject.isSelectable) { // ? to be sure it's loaded
       const images = document.querySelectorAll('img');
       images.forEach(img => {
-        if (!img.src.includes('assets')) { // ? filter only for external images
+        if (!img.src.includes('assets') && img.src) { // ? filter only for external images
           img.style.cursor = 'pointer';
           img.addEventListener('click', () => {
             this.showImageFullSize(img.src)
@@ -147,27 +148,7 @@ export class SubjectComponent implements OnInit, OnDestroy {
     }
   }
 
-  showImageFullSize(imageSrc: string) {
-    this.overlayRef = this.overlay.create({
-      hasBackdrop: true,
-      backdropClass: 'cdk-overlay-dark-backdrop',
-      positionStrategy: this.overlay.position()
-        .global()
-        .centerHorizontally()
-        .centerVertically(),
-      scrollStrategy: this.overlay.scrollStrategies.block(),
-      panelClass: 'full-screen-overlay',
-    });
-
-    const portal = new TemplatePortal(this.imageTemplate, this.viewContainerRef, { imageSrc });
-
-    this.overlayRef.attach(portal);
-
-    this.overlayRef.backdropClick().pipe(
-      tap(() => {
-        this.overlayRef.detach();
-      }),
-      takeUntil(this.destroy$)
-    ).subscribe();
+  private showImageFullSize(src: string){
+    this.sweetAlertService.showFullSizeImg(src);
   }
 }

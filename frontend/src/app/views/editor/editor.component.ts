@@ -113,9 +113,9 @@ export class EditorComponent implements OnInit, OnDestroy {
       this.sweetAlertModalsService.emptyTemplateDownload(this.getCode());
     } else {
       this.sweetAlertModalsService.downloadHtml(
-        'Input file name',
-        'file name for download',
-        'Enter file name',
+        'შეიყვანეთ ფაილის სახელი',
+        'ფაილის სახელი გადმოწერად',
+        'შეიყვანეთ ფაილის სახელი',
         this.getCode(),
         'html'
       );
