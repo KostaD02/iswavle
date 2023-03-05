@@ -62,6 +62,10 @@ section {
       }
     }
   }
+
+  .full-size-side {
+    grid-template-columns: 1fr;
+  }
 }
 
 .example-code {

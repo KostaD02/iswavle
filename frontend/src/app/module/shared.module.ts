@@ -10,7 +10,8 @@ import {
   ErrorOutputComponent,
   ScrollupComponent,
   LoaderComponent,
-  ChipComponent
+  ChipComponent,
+  TableComponent
 } from '.././shared';
 
 @NgModule({
@@ -23,7 +24,8 @@ import {
     ErrorOutputComponent,
     ScrollupComponent,
     LoaderComponent,
-    ChipComponent
+    ChipComponent,
+    TableComponent
   ],
   imports: [
     CommonModuleModule
@@ -37,7 +39,8 @@ import {
     ErrorOutputComponent,
     ScrollupComponent,
     LoaderComponent,
-    ChipComponent
+    ChipComponent,
+    TableComponent
   ]
 })
 export class SharedModule { }

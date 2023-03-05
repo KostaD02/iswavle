@@ -8,7 +8,7 @@
   <ng-template #found>
     <h2>{{subject.prefix}} {{subject.name}}</h2>
     <article class="content">
-      <div class="wrapper">
+      <div class="wrapper" [ngClass]="{'full-size-side': !isNavigation}">
         <aside class="left">
           <div class="wrap" *ngFor="let subjectResponse of subject.data" [id]="subjectResponse.navigation?.id ?? ''">
             <div class="native-element" *ngIf="subjectResponse.isNativeElement" [innerHTML]="subjectResponse.content | noSanitize"></div>
@@ -19,6 +19,14 @@
                 <button mat-raised-button color="primary" [routerLink]="subjectResponse.data?.routerLink">გამოიყენე კოდი</button>
               </div>
             </div>
+            <app-table
+              *ngIf="subjectResponse.isTable"
+              [isFilterAllowed]="subjectResponse.tableConfig!.isFilterAllowed"
+              [filterPlaceHolder]="subjectResponse.tableConfig!.filterPlaceHolder"
+              [isPaginateAllowed]="subjectResponse.tableConfig!.isPaginateAllowed"
+              [columnsData]="subjectResponse.tableConfig!.displayColumns"
+              [data]="subjectResponse.tableConfig!.data"
+            ></app-table>
           </div>
         </aside>
         <aside class="right">

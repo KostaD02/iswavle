@@ -1,3 +1,4 @@
+import { TableConfig } from './table-config.interface';
 import { TranslateInterface } from './translate.interface';
 
 export interface SubjectInterface {
@@ -27,6 +28,8 @@ export interface SubjectDataResponseInterface {
   content: string;
   data?: SubjectCodeExampleInterface;
   navigation?: SubjectIdInterface;
+  isTable?: boolean;
+  tableConfig?: TableConfig;
 }
 
 export interface SubjectIdInterface {

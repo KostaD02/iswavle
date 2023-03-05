@@ -81,6 +81,13 @@ a {
   content: ">";
 }
 
+.active-color {
+  color: var(--primary-color);
+}
+
+.text-bold {
+  font-weight: bold;
+}
 
 *::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);

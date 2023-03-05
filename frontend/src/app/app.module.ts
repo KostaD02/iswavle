@@ -8,7 +8,7 @@ import { CommonModuleModule, DirectiveModule, PipeModule, SharedModule } from '.
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,

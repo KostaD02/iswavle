@@ -1,0 +1,25 @@
+section {
+  display: grid;
+  grid-template-columns: 1fr;
+
+  .mat-elevation-z8{
+    overflow: auto;
+    max-width: 100%;
+
+    table {
+      width: 100%;
+    }
+  }
+
+  mat-form-field {
+    width: 100%;
+  }
+
+  td, th {
+    width: 25%;
+  }
+
+  .hide {
+    display: none;
+  }
+}

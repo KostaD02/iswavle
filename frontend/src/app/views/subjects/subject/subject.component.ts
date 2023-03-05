@@ -1,10 +1,11 @@
 import { SweetAlertModalsService } from './../../../services/sweet-alert-modals.service';
-import { Component, OnInit, OnDestroy} from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil, tap } from 'rxjs/operators';
-import { SubjectInterface } from '../../../interfaces';
+import { SubjectInterface, TableConfig } from '../../../interfaces';
 import { SeoServiceService, SubjectService } from '../../../services';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-subject',
@@ -15,6 +16,7 @@ export class SubjectComponent implements OnInit, OnDestroy {
   public readonly destroy$ = new Subject<void>();
 
   public spySubject: string = "";
+  public isNavigation: boolean = false;
 
   private defaultSubject: SubjectInterface = {
     name: '',
@@ -74,6 +76,15 @@ export class SubjectComponent implements OnInit, OnDestroy {
           if (title.length > 2) {
             this.seoService.updateTitle(title);
           }
+
+          let count = 0;
+
+          this.subject.data?.forEach(element => {
+            if (element.navigation?.id || element.navigation?.name){
+              count++;
+            }
+            this.isNavigation = count >= 1;
+          });
         }
         setTimeout(() => { // ? Because of NG0100 have to use setTimeout, can't use either ngAfterViewInit
           this.initScrollSpies();
@@ -148,7 +159,7 @@ export class SubjectComponent implements OnInit, OnDestroy {
     }
   }
 
-  private showImageFullSize(src: string){
+  private showImageFullSize(src: string) {
     this.sweetAlertService.showFullSizeImg(src);
   }
 }

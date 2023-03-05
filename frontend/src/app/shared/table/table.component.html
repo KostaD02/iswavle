@@ -1,0 +1,20 @@
+<section>
+  <mat-form-field [ngStyle]="{'hide': !isFilterAllowed}">
+    <mat-label>{{ filterLabel }}</mat-label>
+    <input [disabled]="!isFilterAllowed" matInput (keyup)="applyFilter($event)" [placeholder]="filterPlaceHolder" #input>
+  </mat-form-field>
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+      <ng-container [matColumnDef]="col" *ngFor="let col of displayedColumns; let i = index">
+        <th class="disable-select" mat-header-cell *matHeaderCellDef mat-sort-header>{{ columnsData[i].displayName }}</th>
+        <td mat-cell *matCellDef="let row" [innerHtml]="row[col]"></td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">ინფორმაცია ვერ მოიძებნა ცხრილში "{{ input.value }}"</td>
+      </tr>
+    </table>
+    <mat-paginator *ngIf="isPaginateAllowed" [pageSizeOptions]="pageSizeOptions"></mat-paginator>
+  </div>
+</section>
