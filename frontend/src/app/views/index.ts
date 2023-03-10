@@ -6,3 +6,4 @@ export * from './subjects/subject/subject.component';
 export * from './subjects/default-subject/default-subject.component';
 export * from './tasks/tasks.component';
 export * from './create-subject/create-subject.component';
+export * from './create-code-example/create-code-example.component';

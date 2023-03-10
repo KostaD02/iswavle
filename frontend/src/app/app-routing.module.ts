@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { KEYWORDS } from './constants';
 import { SubjectGuard } from './guards';
 import {
+  CreateCodeExampleComponent,
   CreateSubjectComponent,
   DefaultSubjectComponent,
   EditorComponent,
@@ -56,7 +57,14 @@ const routes: Routes = [
         path: ':id',
         component: EditorComponent,
         data: {
-          loadCode: true
+          title: "ედითორი",
+          loadCode: true,
+          seo: {
+            title: 'Iswavle | ონლაინ ედითორი',
+            metaTags: [
+              { name: "robots", content: "noindex" }
+            ]
+          }
         }
       }
     ]
@@ -121,6 +129,20 @@ const routes: Routes = [
       title: "შექმენი თემა",
       seo: {
         title: 'Iswavle | შექმენი თემა',
+        metaTags: [
+          { name: "robots", content: "noindex" }
+        ]
+      }
+    }
+  },
+  {
+    path: 'create-code-example',
+    component: CreateCodeExampleComponent,
+    canActivate: [SubjectGuard],
+    data: {
+      title: "შექმენი კოდის მაგალით",
+      seo: {
+        title: 'Iswavle | შექმენი კოდის მაგალით',
         metaTags: [
           { name: "robots", content: "noindex" }
         ]

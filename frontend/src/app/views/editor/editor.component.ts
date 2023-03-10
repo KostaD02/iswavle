@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { takeUntil, tap } from 'rxjs/operators';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { WEB_LANGUAGES_DATA } from '../../constants';
-import { WebCodeContentEnum } from './../../enums';
+import { SweetAlertIcon, WebCodeContentEnum } from './../../enums';
 import { WebCodeContentInterface, CodeMirrorEmiterData, ResponseCodeInterface } from '../../interfaces';
 import { SweetAlertModalsService, InformationService, WebRequestsService } from '../../services';
 
@@ -19,7 +19,7 @@ export class EditorComponent implements OnInit, OnDestroy {
   @ViewChild('frame', { static: true }) private frame!: ElementRef;
 
   public LANGUAGES_DATA = WEB_LANGUAGES_DATA;
-  public previousCode: string[] = ['','',''];
+  public previousCode: string[] = ['', '', ''];
 
   public readonly clearStream$ = new BehaviorSubject<boolean>(false);
   public readonly codeStream$ = new BehaviorSubject<string[]>(this.previousCode);
@@ -82,28 +82,33 @@ export class EditorComponent implements OnInit, OnDestroy {
     this.destroy$.next();
   }
 
-  private loadPreviousCode(){
+  private loadPreviousCode() {
     const url = this.router.url.split('/');
-    if (url[1] === 'editor' && url[2]?.length === 24){
+    if (url[1] === 'editor' && url[2]?.length === 24) {
       this.httpService.get(`code/${url[2]}`).pipe(
-        tap((result )=>{
-          const response = result as ResponseCodeInterface;
-          response.code.forEach((code: string, index: number) => {
-            this.previousCode[index] = code;
+        tap((result) => {
+          if (result) {
+            const response = result as ResponseCodeInterface;
+            response.code.forEach((code: string, index: number) => {
+              this.previousCode[index] = code;
 
-            if (index === 2){
-              this.previousCode[index] = `// Don't loop code otherwise it will freeze your tab \n${this.previousCode[index]}`;
-            }
-          });
-          this.codeStream$.next(this.previousCode);
-          this.updateCode();
+              if (index === 2) {
+                this.previousCode[index] = `// Don't loop code otherwise it will freeze your tab \n${this.previousCode[index]}`;
+              }
+            });
+            this.codeStream$.next(this.previousCode);
+            this.updateCode();
+            this.sweetAlertModalsService.displayToast('კოდი წარმატებით ჩაიტვირთა', 'success', 'green');
+          } else {
+            this.sweetAlertModalsService.displayModal(SweetAlertIcon.Error, 'არასწორი მისამართი', 'ამ მისამართზე არანაირი კოდი არ არის შენახული სტატუსი: 404');
+          }
         }),
         takeUntil(this.destroy$)
       ).subscribe();
     }
   }
 
-  private initResolutionValue(){
+  private initResolutionValue() {
     const frame = this.frame.nativeElement as HTMLElement;
     this.resolution = `${frame.offsetWidth} x ${frame.offsetHeight}`;
   }
@@ -161,18 +166,11 @@ export class EditorComponent implements OnInit, OnDestroy {
           />
           <title>${this.informationService.title}</title>
           <link rel="icon" type="image/x-icon" href="${this.informationService.favicon ?? 'https://avatars.githubusercontent.com/u/68782786?v=4'}">
-          <style>
-            body {
-              margin: 0px;
-              padding: 0px;
-            }
-          </style>
           <style>${this.content.css}</style>
         </head>
         <body>
           ${this.content.html}
           <script>${this.content.javascript}</script>
-
         </body>
       </html>
     `;
@@ -195,7 +193,7 @@ export class EditorComponent implements OnInit, OnDestroy {
 
   public resetCode() {
     const content = [this.content[WebCodeContentEnum.HTML], this.content[WebCodeContentEnum.CSS], this.content[WebCodeContentEnum.JS]];
-    if (content.every(code => code.length === 0)){
+    if (content.every(code => code.length === 0)) {
       return;
     }
 
@@ -271,7 +269,7 @@ export class EditorComponent implements OnInit, OnDestroy {
     this.rotateFrame = !this.rotateFrame;
     const element = document.querySelector('.CodeMirror') as HTMLElement;
     const secondElement = document.querySelector(".mat-tab-body-content") as HTMLElement;
-    if (this.rotateFrame){
+    if (this.rotateFrame) {
       element.style.height = '300px'; // ? set default size for code mirror
       secondElement.style.overflowY = 'hidden';
     } else {

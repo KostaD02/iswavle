@@ -1,0 +1,28 @@
+<section class="wrapper">
+  <article class="code">
+    <aside class="top">
+      <h1>დაამატე კოდის მაგალითი</h1>
+    </aside>
+    <aside class="bottom">
+      <form [formGroup]="code">
+        <mat-form-field>
+          <mat-label>HTML</mat-label>
+          <textarea formControlName="html" matInput></textarea>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>CSS</mat-label>
+          <textarea formControlName="css" matInput></textarea>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>JS</mat-label>
+          <textarea formControlName="js" matInput></textarea>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Description</mat-label>
+          <textarea formControlName="description" matInput></textarea>
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="onSubmit()">დაამატე</button>
+      </form>
+    </aside>
+  </article>
+</section>

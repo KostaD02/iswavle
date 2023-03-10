@@ -9,6 +9,7 @@ import {
   SubjectsComponent,
   TasksComponent,
   CreateSubjectComponent,
+  CreateCodeExampleComponent
 } from '../views';
 
 import { CommonModuleModule } from './common-module.module';
@@ -24,7 +25,8 @@ import { SharedModule } from './shared.module';
     SubjectComponent,
     DefaultSubjectComponent,
     TasksComponent,
-    CreateSubjectComponent
+    CreateSubjectComponent,
+    CreateCodeExampleComponent
   ],
   imports: [
     CommonModuleModule,
@@ -39,7 +41,8 @@ import { SharedModule } from './shared.module';
     SubjectComponent,
     DefaultSubjectComponent,
     TasksComponent,
-    CreateSubjectComponent
+    CreateSubjectComponent,
+    CreateCodeExampleComponent
   ]
 })
 export class ViewModule { }

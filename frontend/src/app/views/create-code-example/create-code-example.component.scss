@@ -1,0 +1,31 @@
+.wrapper {
+  width: 100%;
+  height: calc(100vh - 80px - 160px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .code {
+    padding: 25px;
+    box-shadow: rgba(0,0,0,0.35) 0px 5px 15px;
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 15px;
+
+    .top {
+      text-align: center;
+    }
+
+    .bottom form {
+      min-width: 500px;
+      display: grid;
+      grid-template-columns: 1fr;
+      row-gap: 10px;
+
+      textarea {
+        height: 50px;
+        resize: none;
+      }
+    }
+  }
+}
