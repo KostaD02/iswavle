@@ -5,3 +5,4 @@ export * from './web-requests.service';
 export * from './header.service';
 export * from './subject.service';
 export * from './seo-service.service';
+export * from './qrcode.service';

@@ -12,8 +12,14 @@ export class SeoServiceService {
     this.title.setTitle(title);
   }
 
-  public updateMetaTag(meta: string, content: string) {
+  public updateMetaTagProperty(meta: string, content: string) {
+    this.meta.removeTag(`property="${meta}"`);
     this.meta.addTag({ property: meta, content: content });
+  }
+
+  public updateMetaTagName(meta: string, content: string) {
+    this.meta.removeTag(`name="${meta}"`);
+    this.meta.addTag({ name: meta, content: content });
   }
 
   public updateMetaTags(metaTags: MetaDefinition[]) {

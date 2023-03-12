@@ -25,6 +25,7 @@ const routes: Routes = [
       seo: {
         title: 'Iswavle | ისწავლე ფრონტ ენდი',
         metaTags: [
+          { name: 'title', content: "Iswavle | ისწავლე ფრონტ ენდი" },
           { name: 'description', content: 'დოკუმენტაცია ქართულად, დავალებები ქართულად, ონლაინ ედითორი' },
           { name: 'twitter:card', content: imageSource },
           { name: 'keywords', content: KEYWORDS.join() },
@@ -43,6 +44,7 @@ const routes: Routes = [
       seo: {
         title: 'Iswavle | ონლაინ ედითორი',
         metaTags: [
+          { name: 'title', content: "Iswavle | ონლაინ ედითორი" },
           { name: 'description', content: 'ონლაინ ედითორი HTML/CSS/JS' },
           { name: 'keywords', content: KEYWORDS.join() },
           { name: 'twitter:card', content: imageSource },
@@ -75,7 +77,14 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: DefaultSubjectComponent
+        component: DefaultSubjectComponent,
+        data: {
+          seo: {
+            metaTags: [
+              { name: 'title', content: "Iswavle | ცნობარი ქართულად" },
+            ]
+          }
+        }
       },
       {
         path: ':subject',
@@ -83,7 +92,7 @@ const routes: Routes = [
         data: {
           title: "თემები",
           seo: {
-            title: 'Iswavle | ცნობარი ქართულად'
+            title: 'Iswavle | ცნობარი ქართულად',
           }
         }
       }
@@ -111,6 +120,7 @@ const routes: Routes = [
       seo: {
         title: 'Iswavle | დავალებები ქართულად',
         metaTags: [
+          { name: 'title', content: "Iswavle | დავალებები ქართულად" },
           { name: 'description', content: 'დავალებები HTML/CSS/JS' },
           { name: 'keywords', content: KEYWORDS.join() },
           { name: 'twitter:card', content: imageSource },

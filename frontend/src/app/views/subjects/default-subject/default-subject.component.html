@@ -3,6 +3,19 @@
     <h2>თემები</h2>
   </aside>
   <aside class="bottom">
-    <app-subject-card *ngFor="let subject of subjects" [subject]="subject"></app-subject-card>
+    <app-subject-card *ngFor="let subject of subjects" [subject]="subject" (contextmenu)="onContextMenu($event, subject)"></app-subject-card>
   </aside>
 </article>
+
+<!-- template oncontextmenu -->
+<div style="visibility: hidden; position: fixed"
+    [style.left]="contextMenuPosition.x"
+    [style.top]="contextMenuPosition.y"
+    [matMenuTriggerFor]="contextMenu">
+</div>
+<mat-menu #contextMenu="matMenu">
+  <ng-template matMenuContent let-item="item">
+    <button class="list-item" mat-menu-item (click)="onContextMenuShare(item)"><mat-icon>share</mat-icon> გაზიარება</button>
+    <button class="list-item" mat-menu-item (click)="onContextMenuQRCode(item)"><img class="icon" src="../../../../assets/svgs/qrcode.svg" alt="qr image icon"> QR კოდი</button>
+  </ng-template>
+</mat-menu>

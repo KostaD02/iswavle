@@ -16,3 +16,20 @@ article {
     gap: 10px;
   }
 }
+
+.list-item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 5px;
+
+  mat-icon {
+    margin: 0px;
+  }
+
+  .icon {
+    width: 24px;
+    height: 24px;
+  }
+}
+

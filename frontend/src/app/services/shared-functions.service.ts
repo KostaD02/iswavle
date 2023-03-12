@@ -30,7 +30,7 @@ export class SharedFunctionsService {
 
     const getImageName = (imageSrc: string) => {
       let isUploadedOnPostImg = imageSrc.search('postimg') >= 0;
-      return isUploadedOnPostImg ? imageSrc.split('/').pop() : this.getFileName('untitled', 'jpg');
+      return isUploadedOnPostImg ? imageSrc.split('/').pop() : this.getFileName('generated_image', 'jpg');
     }
 
     const imageUrl = await this.toDataUrl(src);

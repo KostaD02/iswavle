@@ -75,6 +75,12 @@ export class SubjectComponent implements OnInit, OnDestroy {
           const title = `Iswavle | ${this.subject.prefix} ${this.subject.name}`;
           if (title.length > 2) {
             this.seoService.updateTitle(title);
+            this.seoService.updateMetaTagName('title',`${this.subject.prefix} ${this.subject.name}`);
+            if (`${this.subject.prefix} ${this.subject.name}` !== this.subject.description) {
+              this.seoService.updateMetaTagName('description',`${this.subject.description}`);
+            } else {
+              this.seoService.updateMetaTagName('description',`განხილული საკითხები: ${this.subject.tags?.join()}`)
+            }
           }
 
           let count = 0;
