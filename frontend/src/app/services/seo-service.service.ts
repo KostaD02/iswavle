@@ -25,4 +25,12 @@ export class SeoServiceService {
   public updateMetaTags(metaTags: MetaDefinition[]) {
     metaTags.forEach(meta => this.meta.updateTag(meta));
   }
+
+  public updateMediaMetaTags(tag: string, content: string) {
+    this.updateMetaTagName(tag, content);
+    const array = ['og:', 'twitter:'];
+    array.forEach(meta => {
+      this.updateMetaTagProperty(`${meta}${tag}`, content);
+    })
+  }
 }

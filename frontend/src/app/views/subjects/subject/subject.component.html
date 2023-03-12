@@ -43,6 +43,9 @@
         <button *ngIf="backRoute()" mat-raised-button color="primary" [routerLink]="backRoute()">უკანა თემა</button>
         <button *ngIf="nextRoute()" mat-raised-button color="primary" [routerLink]="nextRoute()">შემდეგი თემა</button>
       </div>
+      <article class="comments">
+        <app-facebook-comment></app-facebook-comment>
+      </article>
     </article>
   </ng-template>
 </section>

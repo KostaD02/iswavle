@@ -3,9 +3,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil, tap } from 'rxjs/operators';
-import { SubjectInterface, TableConfig } from '../../../interfaces';
+import { SubjectInterface } from '../../../interfaces';
 import { SeoServiceService, SubjectService } from '../../../services';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-subject',
@@ -75,11 +74,11 @@ export class SubjectComponent implements OnInit, OnDestroy {
           const title = `Iswavle | ${this.subject.prefix} ${this.subject.name}`;
           if (title.length > 2) {
             this.seoService.updateTitle(title);
-            this.seoService.updateMetaTagName('title',`${this.subject.prefix} ${this.subject.name}`);
+            this.seoService.updateMediaMetaTags('title',`${this.subject.prefix} ${this.subject.name}`);
             if (`${this.subject.prefix} ${this.subject.name}` !== this.subject.description) {
-              this.seoService.updateMetaTagName('description',`${this.subject.description}`);
+              this.seoService.updateMediaMetaTags('description',`${this.subject.description}`);
             } else {
-              this.seoService.updateMetaTagName('description',`განხილული საკითხები: ${this.subject.tags?.join()}`)
+              this.seoService.updateMediaMetaTags('description',`განხილული საკითხები: ${this.subject.tags?.join()}`);
             }
           }
 

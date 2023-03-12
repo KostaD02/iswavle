@@ -51,4 +51,15 @@ export class SharedFunctionsService {
     element.click();
     document.body.removeChild(element);
   }
+
+  public generateRandomString(length: number = 16) {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const buffer = new Uint8Array(length);
+    window.crypto.getRandomValues(buffer);
+    const randomString = Array.from(buffer)
+      .map((byte) => chars[byte % chars.length])
+      .join('');
+
+    return randomString;
+  }
 }

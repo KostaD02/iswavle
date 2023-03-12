@@ -11,7 +11,8 @@ import {
   ScrollupComponent,
   LoaderComponent,
   ChipComponent,
-  TableComponent
+  TableComponent,
+  FacebookCommentComponent
 } from '.././shared';
 
 @NgModule({
@@ -25,7 +26,8 @@ import {
     ScrollupComponent,
     LoaderComponent,
     ChipComponent,
-    TableComponent
+    TableComponent,
+    FacebookCommentComponent
   ],
   imports: [
     CommonModuleModule
@@ -40,7 +42,8 @@ import {
     ScrollupComponent,
     LoaderComponent,
     ChipComponent,
-    TableComponent
+    TableComponent,
+    FacebookCommentComponent
   ]
 })
 export class SharedModule { }

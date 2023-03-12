@@ -86,6 +86,8 @@ export class AppComponent implements OnInit {
       if (seoData) {
         if (seoData['title']) this.seoService.updateTitle(seoData['title']);
         if (seoData['metaTags']) this.seoService.updateMetaTags(seoData['metaTags']);
+        this.seoService.updateMetaTagProperty('og:url', location.href);
+        this.seoService.updateMetaTagProperty('twitter:url', location.href);
       }
       this.toolBarName = data['title'] || "";
     });
@@ -115,13 +117,13 @@ export class AppComponent implements OnInit {
     this.filterSubject();
   }
 
-  private initDefaultLog(){
+  private initDefaultLog() {
     DEFAULT_LOG_DATA.forEach(data => {
       console.log(data.message, ...data.style);
     });
   }
 
-  private scrollUpOnLoad(){
+  private scrollUpOnLoad() {
     setTimeout(() => {
       (this.scrollContainer.nativeElement as HTMLElement).scroll({ top: 0, left: 0, behavior: 'smooth' }); // scroll up on load
     }, 100);

@@ -27,11 +27,13 @@ const routes: Routes = [
         metaTags: [
           { name: 'title', content: "Iswavle | ისწავლე ფრონტ ენდი" },
           { name: 'description', content: 'დოკუმენტაცია ქართულად, დავალებები ქართულად, ონლაინ ედითორი' },
-          { name: 'twitter:card', content: imageSource },
           { name: 'keywords', content: KEYWORDS.join() },
           { property: 'og:title', content: 'შეისწავლე ფრონტენდი საკუთარი ტემპით' },
           { property: 'og:description', content: 'დოკუმენტაცია ქართულად, დავალებები ქართულად, ონლაინ ედითორი' },
-          { property: 'og:image', content: imageSource }
+          { property: 'og:image', content: imageSource },
+          { property: 'twitter:image', content: imageSource },
+          { property: 'twitter:title', content: "შეისწავლე ფრონტენდი საკუთარი ტემპით" },
+          { property: 'twitter:description', content: 'დოკუმენტაცია ქართულად, დავალებები ქართულად, ონლაინ ედითორი' },
         ]
       }
     },
@@ -47,10 +49,12 @@ const routes: Routes = [
           { name: 'title', content: "Iswavle | ონლაინ ედითორი" },
           { name: 'description', content: 'ონლაინ ედითორი HTML/CSS/JS' },
           { name: 'keywords', content: KEYWORDS.join() },
-          { name: 'twitter:card', content: imageSource },
           { property: 'og:title', content: 'ონლაინ ედითორი HTML CSS JS' },
           { property: 'og:description', content: 'ონლაინ ედითორი ვებისთვის' },
-          { property: 'og:image', content: imageSource }
+          { property: 'og:image', content: imageSource },
+          { property: 'twitter:image', content: imageSource },
+          { property: 'twitter:title', content: "Iswavle | ონლაინ ედითორი" },
+          { property: 'twitter:description', content: 'ონლაინ ედითორი HTML/CSS/JS'},
         ]
       }
     },
@@ -104,10 +108,12 @@ const routes: Routes = [
         metaTags: [
           { name: 'description', content: 'ცნობარი ქართულად HTML/CSS/JS' },
           { name: 'keywords', content: KEYWORDS.join() },
-          { name: 'twitter:card', content: imageSource },
           { property: 'og:title', content: 'ცნობარი ქართლად HTML CSS JS' },
           { property: 'og:description', content: 'შეისწავლე შენი ტემპით' },
-          { property: 'og:image', content: imageSource }
+          { property: 'og:image', content: imageSource },
+          { property: 'twitter:image', content: imageSource },
+          { property: 'twitter:title', content: 'ცნობარი ქართლად HTML CSS JS' },
+          { property: 'twitter:description', content: 'შეისწავლე შენი ტემპით'},
         ]
       }
     },
@@ -123,10 +129,12 @@ const routes: Routes = [
           { name: 'title', content: "Iswavle | დავალებები ქართულად" },
           { name: 'description', content: 'დავალებები HTML/CSS/JS' },
           { name: 'keywords', content: KEYWORDS.join() },
-          { name: 'twitter:card', content: imageSource },
           { property: 'og:title', content: 'დავალებები ქართლად HTML CSS JS' },
           { property: 'og:description', content: 'შეასრულე ფრონტ-ენდის დავალებები' },
-          { property: 'og:image', content: imageSource }
+          { property: 'og:image', content: imageSource },
+          { property: 'twitter:image', content: imageSource },
+          { property: 'twitter:title', content: 'დავალებები ქართლად HTML CSS JS' },
+          { property: 'twitter:description', content: 'დავალებები HTML/CSS/JS'},
         ]
       }
     },
