@@ -3,7 +3,7 @@
     <mat-label>{{ filterLabel }}</mat-label>
     <input [disabled]="!isFilterAllowed" matInput (keyup)="applyFilter($event)" [placeholder]="filterPlaceHolder" #input>
   </mat-form-field>
-  <div class="mat-elevation-z8">
+  <div class="mat-elevation-z2">
     <table mat-table [dataSource]="dataSource" matSort>
       <ng-container [matColumnDef]="col" *ngFor="let col of displayedColumns; let i = index">
         <th class="disable-select" mat-header-cell *matHeaderCellDef mat-sort-header>{{ columnsData[i].displayName }}</th>
