@@ -84,7 +84,11 @@ export class EditorComponent implements OnInit, OnDestroy {
 
   private loadPreviousCode() {
     const url = this.router.url.split('/');
-    if (url[1] === 'editor' && url[2]?.length === 24) {
+    if (url[1] === 'editor' && url[2]?.length >= 1) {
+      if (url[2]?.length !== 24) {
+        this.sweetAlertModalsService.displayModal(SweetAlertIcon.Error, 'არასწორი მისამართი', 'ამ მისამართზე არანაირი კოდი არ არის შენახული სტატუსი: 404');
+        return;
+      }
       this.httpService.get(`code/${url[2]}`).pipe(
         tap((result) => {
           if (result) {
