@@ -22,11 +22,11 @@ section {
         color: white;
         cursor: pointer;
         font-weight: 500;
-        font-size: 16px;
+        font-size: 1rem;
 
         img {
-          width: 25px;
-          height: 25px;
+          width: 1.563rem;
+          height: 1.563rem;
         }
       }
 
@@ -67,7 +67,7 @@ section {
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 20px;
+      gap: 1.25rem;
 
       a,
       span {

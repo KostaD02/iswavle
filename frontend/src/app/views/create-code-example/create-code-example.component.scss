@@ -1,6 +1,6 @@
 .wrapper {
   width: 100%;
-  height: calc(100vh - 80px - 160px);
+  height: calc(100vh - 5rem - 10rem);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -17,13 +17,13 @@
     }
 
     .bottom form {
-      min-width: 500px;
+      min-width: 31.25rem;
       display: grid;
       grid-template-columns: 1fr;
       row-gap: 10px;
 
       textarea {
-        height: 50px;
+        height: 3.125rem;
         resize: none;
       }
     }

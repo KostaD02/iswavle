@@ -1,23 +1,23 @@
 form {
   width: 90%;
-  height: calc(100vh - 80px - 56px - 160px);
-  margin: 25px auto;
-  padding: 25px;
+  height: calc(100vh - 5rem - 3.5rem - 10rem);
+  margin: 1.563rem auto;
+  padding: 1.563rem;
   box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
   display: grid;
   grid-template-columns: 1fr;
-  row-gap: 15px;
+  row-gap: 0.938rem;
   overflow-y: auto;
 
   .static {
     display: grid;
     grid-template-columns: 1fr;
-    row-gap: 15px;
+    row-gap: 0.938rem;
 
     .wrap {
       display: flex;
       justify-content: space-between;
-      gap: 10px;
+      gap: 0.625rem;
 
       mat-form-field {
         flex-grow: 1;
@@ -28,7 +28,7 @@ form {
   .generated {
     .buttons {
       display: flex;
-      gap: 10px;
+      gap: 0.625rem;
     }
 
     .wrap {
@@ -42,7 +42,7 @@ form {
       .content-header {
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: 0.625rem;
 
         h3 {
           margin: 0px !important;
@@ -52,18 +52,18 @@ form {
       .info {
         display: grid;
         grid-template-columns: 1fr;
-        row-gap: 15px;
+        row-gap: 0.938rem;
       }
 
       .content {
         display: grid;
         grid-template-columns: 1fr;
-        row-gap: 15px;
+        row-gap: 0.938rem;
 
         .group {
           display: flex;
           justify-content: space-between;
-          gap: 10px;
+          gap: 0.625rem;
 
           mat-form-field {
             flex-grow: 1;

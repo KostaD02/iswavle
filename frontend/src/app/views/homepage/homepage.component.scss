@@ -3,12 +3,12 @@
   display: grid;
   grid-template-columns: 1fr;
   place-items: center;
-  row-gap: 50px;
-  padding-bottom: 50px;
+  row-gap: 3.125rem;
+  padding-bottom: 3.125rem;
 
   .banner {
     width: 100%;
-    height: 300px;
+    height: 18.75rem;
     background-color: var(--primary-color);
     display: flex;
     justify-content: center;
@@ -22,12 +22,12 @@
       text-align: center;
       display: grid;
       grid-template-columns: 1fr;
-      row-gap: 20px;
+      row-gap: 1.25rem;
 
       h1 {
         font-size: 3rem;
         font-weight: 600;
-        margin-bottom: 25px;
+        margin-bottom: 1.563rem;
       }
 
       p {
@@ -65,7 +65,7 @@
         width: 100%;
         display: grid;
         grid-template-columns: 1fr 1fr;
-        column-gap: 50px;
+        column-gap: 3.125rem;
 
         .left {
           display: flex;

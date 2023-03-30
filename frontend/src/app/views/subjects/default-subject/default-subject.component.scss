@@ -1,6 +1,6 @@
 article {
   user-select: none;
-  padding: 20px;
+  padding: 1.25rem;
   display: grid;
   grid-template-columns: 1fr;
   row-gap: 10px;
@@ -28,8 +28,8 @@ article {
   }
 
   .icon {
-    width: 24px;
-    height: 24px;
+    width: 1.5rem;
+    height: 1.5rem;
   }
 }
 

@@ -1,10 +1,10 @@
 .wrapper {
   width: 95%;
-  height: calc(100% - 80px);
+  height: calc(100% - 5rem);
   margin: auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  column-gap: 30px;
+  column-gap: 1.875rem;
 
   .left {
     height: 100%;
@@ -16,7 +16,7 @@
       height: 100%;
 
       .code {
-        height: calc(100% - 105px);
+        height: calc(100% - 6.563rem);
 
         mat-tab-group {
           height: 100%;
@@ -40,8 +40,8 @@
         align-items: center;
 
         img {
-          height: 20px;
-          width: 20px;
+          height: 1.25rem;
+          width: 1.25rem;
         }
       }
 
@@ -51,16 +51,16 @@
     }
 
     .buttons {
-      padding: 10px 0px;
+      padding: 0.625rem 0px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 0.625rem;
 
       .buttons-group {
         display: flex;
-        gap: 10px;
+        gap: 0.625rem;
         flex-wrap: wrap;
       }
 
@@ -80,8 +80,8 @@
 
     div {
       position: absolute;
-      top: 10px;
-      right: 20px;
+      top: 0.625rem;
+      right: 1.25rem;
       user-select: none;
     }
 
@@ -97,7 +97,7 @@
 .custom-tempalte-column {
   grid-template-columns: 1fr;
   grid-template-rows: auto 1fr;
-  row-gap: 20px;
+  row-gap: 1.25rem;
 
   .left {
     .wrap {
@@ -106,7 +106,7 @@
   }
 
   iframe {
-    min-height: 200px;
+    min-height: 12.5rem;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   }
 }
@@ -122,7 +122,7 @@
     padding-bottom: 25px;
 
     iframe {
-      min-height: 200px;
+      min-height: 12.5rem;
       background-color: white;
     }
 
