@@ -59,10 +59,10 @@ export class EditorComponent implements OnInit, OnDestroy {
   }
 
   @HostListener("window:beforeunload", ["$event"]) beforeUnload(event: any) {
-    if (!this.isReloading && this.counter >= 1) {
-      event.preventDefault();
-      event.returnValue = "Are you sure you want to leave?";
-    }
+    // if (!this.isReloading && this.counter >= 1) {
+    //   event.preventDefault();
+    //   event.returnValue = "Are you sure you want to leave?";
+    // }
   }
 
   @HostListener("window:unload") unload() {
@@ -109,6 +109,22 @@ export class EditorComponent implements OnInit, OnDestroy {
         }),
         takeUntil(this.destroy$)
       ).subscribe();
+    } else {
+      const content = localStorage.getItem('last_updated_code');
+      if (content) {
+        setTimeout(() => {
+          const parsedContent = JSON.parse(content);
+          if (parsedContent.html || parsedContent.css || parsedContent.javascript) {
+            this.content = JSON.parse(content);
+            this.updateCode();
+            this.previousCode[0] = this.content.html;
+            this.previousCode[1] = this.content.css;
+            this.previousCode[2] = this.content.javascript;
+            this.codeStream$.next(this.previousCode);
+            this.sweetAlertModalsService.displayToast('დამახსოვრებული კოდი წარმატებით ჩაიტვირთა','success','green');
+          }
+        }, 500); // ? Because of NG0100 have to use setTimeout
+      }
     }
   }
 
@@ -139,14 +155,30 @@ export class EditorComponent implements OnInit, OnDestroy {
       this.errorOutput();
     */
     this.counter++;
+    if (data.content || data.isEmpty) {
+      localStorage.setItem('last_updated_code', JSON.stringify(this.content));
+    }
   }
 
   private updateCode(): void {
-    //console.clear();
-    this.visual = this.getCode();
+    // console.clear();
+    this.visual = this.getCode(true);
   }
 
-  private getCode(): string {
+  private getCode(isUpdateCode: boolean = false): string {
+    const placeHolderImageTemplateCode = `
+      document.querySelectorAll('img').forEach(image => {
+        if (image.src === '${location.href.replace('/editor','')}/test.png' || image.src === '${location.href.replace('/editor','')}/test.gif') {
+          image.src = image.src === '${location.href.replace('/editor','')}/test.png'
+            ? 'https://raw.githubusercontent.com/KostaD02/iswavle/main/frontend/src/assets/images/test_for_editor.png'
+            : 'https://raw.githubusercontent.com/KostaD02/iswavle/main/frontend/src/assets/images/test_for_editor.gif';
+          image.width = "250";
+          image.height = "250";
+          image.style.objectFit = "cover";
+        }
+      });
+    `;
+
     return `
       <!-- Created at : ${location.href} -->
       <!-- კოდი დაგენერირებულია : ${location.href} -->
@@ -174,7 +206,11 @@ export class EditorComponent implements OnInit, OnDestroy {
         </head>
         <body>
           ${this.content.html}
-          <script>${this.content.javascript}</script>
+          <span><!-- დამატებითი ელემენტი რომ ჯავასკრიპტის კოდი არ გამოჩნდეს ჰტმლ-ში თუ თეგი არ არის დამთავრებული --></span>
+          <script>
+            ${isUpdateCode ? placeHolderImageTemplateCode : ''}
+            ${this.content.javascript}
+          </script>
         </body>
       </html>
     `;

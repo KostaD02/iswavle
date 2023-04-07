@@ -54,10 +54,11 @@ export class CodeeditorComponent implements OnInit, AfterViewInit, OnDestroy {
     this.destroy$.next();
   }
 
-  public onKeyUp() {
+  public onKeyUp(event?: KeyboardEvent) {
     this.contentEmitter.emit({
       content: this.content,
-      languageName: this.languageName.toLocaleLowerCase() as WebCodeContentEnum
+      languageName: this.languageName.toLocaleLowerCase() as WebCodeContentEnum,
+      isEmpty: event?.code === 'Backspace' ?? false
     });
   }
 

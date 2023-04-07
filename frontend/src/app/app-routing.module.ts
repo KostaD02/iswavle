@@ -84,6 +84,7 @@ const routes: Routes = [
         component: DefaultSubjectComponent,
         data: {
           seo: {
+            title: 'Iswavle | თემები',
             metaTags: [
               { name: 'title', content: "Iswavle | ცნობარი ქართულად" },
             ]

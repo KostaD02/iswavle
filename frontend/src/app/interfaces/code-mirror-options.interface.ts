@@ -66,4 +66,5 @@ export interface CodeMirrorOptions {
 export interface CodeMirrorEmiterData {
   content: string;
   languageName: WebCodeContentEnum;
+  isEmpty?: boolean;
 }

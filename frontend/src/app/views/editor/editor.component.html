@@ -47,6 +47,6 @@
   </aside>
   <aside class="right">
     <div *ngIf="showResultion"><span>{{ resolution }}</span></div>
-    <iframe #frame [srcdoc]="visual | noSanitize" sandbox="allow-scripts"></iframe>
+    <iframe #frame allowfullscreen="true" [srcdoc]="visual | noSanitize" sandbox="allow-scripts allow-popups allow-modals"></iframe>
   </aside>
 </section>
