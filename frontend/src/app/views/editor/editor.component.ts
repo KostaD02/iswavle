@@ -121,7 +121,7 @@ export class EditorComponent implements OnInit, OnDestroy {
             this.previousCode[1] = this.content.css;
             this.previousCode[2] = this.content.javascript;
             this.codeStream$.next(this.previousCode);
-            this.sweetAlertModalsService.displayToast('დამახსოვრებული კოდი წარმატებით ჩაიტვირთა','success','green');
+            this.sweetAlertModalsService.displayToast('დამახსოვრებული კოდი წარმატებით ჩაიტვირთა', 'success', 'green');
           }
         }, 500); // ? Because of NG0100 have to use setTimeout
       }
@@ -162,14 +162,16 @@ export class EditorComponent implements OnInit, OnDestroy {
 
   private updateCode(): void {
     console.clear();
-    this.visual = this.getCode(true);
+    setTimeout(() => {
+      this.visual = this.getCode(true);
+    }, 500); // ? Because of NG0100 have to use setTimeout
   }
 
   private getCode(isUpdateCode: boolean = false): string {
     const placeHolderImageTemplateCode = `
       document.querySelectorAll('img').forEach(image => {
-        if (image.src === '${location.href.replace('/editor','')}/test.png' || image.src === '${location.href.replace('/editor','')}/test.gif') {
-          image.src = image.src === '${location.href.replace('/editor','')}/test.png'
+        if (image.src === '${location.href.replace('/editor', '')}/test.png' || image.src === '${location.href.replace('/editor', '')}/test.gif') {
+          image.src = image.src === '${location.href.replace('/editor', '')}/test.png'
             ? 'https://raw.githubusercontent.com/KostaD02/iswavle/main/frontend/src/assets/images/test_for_editor.png'
             : 'https://raw.githubusercontent.com/KostaD02/iswavle/main/frontend/src/assets/images/test_for_editor.gif';
           image.width = "250";
