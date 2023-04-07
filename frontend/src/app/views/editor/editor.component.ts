@@ -161,7 +161,7 @@ export class EditorComponent implements OnInit, OnDestroy {
   }
 
   private updateCode(): void {
-    // console.clear();
+    console.clear();
     this.visual = this.getCode(true);
   }
 
@@ -174,7 +174,7 @@ export class EditorComponent implements OnInit, OnDestroy {
             : 'https://raw.githubusercontent.com/KostaD02/iswavle/main/frontend/src/assets/images/test_for_editor.gif';
           image.width = "250";
           image.height = "250";
-          image.style.objectFit = "cover";
+          image.style.objectFit = "contain";
         }
       });
     `;
