@@ -59,10 +59,10 @@ export class EditorComponent implements OnInit, OnDestroy {
   }
 
   @HostListener("window:beforeunload", ["$event"]) beforeUnload(event: any) {
-    // if (!this.isReloading && this.counter >= 1) {
-    //   event.preventDefault();
-    //   event.returnValue = "Are you sure you want to leave?";
-    // }
+    if (!this.isReloading && this.counter >= 1) {
+      event.preventDefault();
+      event.returnValue = "Are you sure you want to leave?";
+    }
   }
 
   @HostListener("window:unload") unload() {
@@ -121,7 +121,9 @@ export class EditorComponent implements OnInit, OnDestroy {
             this.previousCode[1] = this.content.css;
             this.previousCode[2] = this.content.javascript;
             this.codeStream$.next(this.previousCode);
-            this.sweetAlertModalsService.displayToast('დამახსოვრებული კოდი წარმატებით ჩაიტვირთა', 'success', 'green');
+            if (this.previousCode[0] || this.previousCode[1] || this.previousCode[2] !== "// Don't loop code otherwise it will freeze your tab \n") {
+              this.sweetAlertModalsService.displayToast('დამახსოვრებული კოდი წარმატებით ჩაიტვირთა', 'success', 'green');
+            }
           }
         }, 500); // ? Because of NG0100 have to use setTimeout
       }
@@ -161,9 +163,9 @@ export class EditorComponent implements OnInit, OnDestroy {
   }
 
   private updateCode(): void {
-    console.clear();
     setTimeout(() => {
       this.visual = this.getCode(true);
+      console.clear();
     }, 500); // ? Because of NG0100 have to use setTimeout
   }
 

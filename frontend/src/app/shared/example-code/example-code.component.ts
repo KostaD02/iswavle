@@ -8,4 +8,5 @@ import { Component, Input } from '@angular/core';
 export class ExampleCodeComponent {
   @Input() code: string = '';
   @Input() language: string = '';
+  public extraKeys = {};
 }

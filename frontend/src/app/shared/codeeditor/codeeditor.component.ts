@@ -22,6 +22,7 @@ export class CodeeditorComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() languageName: string = "HTML";
   @Input() stream$ = new BehaviorSubject<boolean>(false);
   @Input() codeStream$ = new BehaviorSubject<string[]>(['', '', '']);
+  @Input() extraKeys: object = { Ctrl: "autocomplete" };
   @Input() index: number = 0;
 
   @Output() contentEmitter: EventEmitter<CodeMirrorEmiterData> = new EventEmitter();
@@ -76,9 +77,7 @@ export class CodeeditorComponent implements OnInit, AfterViewInit, OnDestroy {
       matchBrackets: true,
       lint: true,
       keyMap: "sublime",
-      extraKeys: {
-        Ctrl: "autocomplete"
-      },
+      extraKeys: this.extraKeys,
       autofocus: true,
     }
   }
