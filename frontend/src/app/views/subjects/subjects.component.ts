@@ -1,10 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { Observable, Subject } from 'rxjs';
-import { tap, takeUntil } from 'rxjs/operators';
+import { Observable, Subject, of } from 'rxjs';
+import { tap, takeUntil, catchError } from 'rxjs/operators';
 
 import { SubjectInterface } from '../../interfaces';
-import { HeaderService, SubjectService, WebRequestsService } from '../../services';
+import { HeaderService, SubjectService, SweetAlertModalsService, WebRequestsService } from '../../services';
+import { SweetAlertIcon } from 'src/app/enums';
 
 @Component({
   selector: 'app-subjects',
@@ -23,7 +24,7 @@ import { HeaderService, SubjectService, WebRequestsService } from '../../service
     ])
   ],
 })
-export class SubjectsComponent implements OnInit ,OnDestroy {
+export class SubjectsComponent implements OnInit, OnDestroy {
   public readonly isHandset$: Observable<boolean> = this.headerService.isHandset$;
   public readonly destroy$ = new Subject<void>();
 
@@ -38,7 +39,8 @@ export class SubjectsComponent implements OnInit ,OnDestroy {
   constructor(
     private headerService: HeaderService,
     private subjectService: SubjectService,
-    private webRequestsService: WebRequestsService
+    private webRequestsService: WebRequestsService,
+    public sweetAlertService: SweetAlertModalsService
   ) { }
 
   ngOnInit(): void {
@@ -48,6 +50,14 @@ export class SubjectsComponent implements OnInit ,OnDestroy {
         const subjectsArray = subjects as SubjectInterface[];
         this.subjectService.subjects$.next(subjectsArray);
         this.subject = subjectsArray;
+      }),
+      catchError(err => {
+        this.sweetAlertService.displayModal(
+          SweetAlertIcon.Error,
+          'დროებით მიუწვდომელია',
+          'დროებით სერვერი გამორთულია, შეგიძლიათ გამოიყენოთ ედითორი'
+        )
+        return of({});
       }),
       takeUntil(this.destroy$)
     ).subscribe();
