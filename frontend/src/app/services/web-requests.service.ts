@@ -8,7 +8,7 @@ export class WebRequestsService {
   readonly rootUrl: string;
 
   constructor(private http: HttpClient) {
-    this.rootUrl = "https://iswavle.herokuapp.com";
+    this.rootUrl = "https://backend.konstantinedatunishvili.com";
   }
 
   public get(url: string) {
